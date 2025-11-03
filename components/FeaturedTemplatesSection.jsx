@@ -1,40 +1,92 @@
-import CardStack from "@/components/CardStack";
-import { getFeaturedProducts, getFreeProducts } from "@/lib/products";
+"use client";
 
-export default async function FeaturedTemplatesSection() {
-  const [featured, free] = await Promise.all([getFeaturedProducts(), getFreeProducts()]);
+import { useEffect, useState } from "react";
+import CardStack from "@/components/CardStack";
+import { useSite } from "@/contexts/SiteContext";
+import { t } from "@/locales/site";
+
+export default function FeaturedTemplatesSection() {
+  const { language } = useSite();
+  const [featured, setFeatured] = useState([]);
+  const [free, setFree] = useState([]);
+  const [isLoading, setIsLoading] = useState(true);
+
+  useEffect(() => {
+    async function loadProducts() {
+      try {
+        const response = await fetch("/api/products");
+        const products = await response.json();
+
+        // Filter featured products
+        const featuredProducts = products.filter(p => p.featured === true || p.featured === 1);
+        setFeatured(featuredProducts);
+
+        // Filter free products
+        const freeProducts = products.filter(p => Number(p.harga) === 0);
+        setFree(freeProducts);
+      } catch (error) {
+        console.error("Error loading products:", error);
+      } finally {
+        setIsLoading(false);
+      }
+    }
+
+    loadProducts();
+  }, []);
+
+  if (isLoading) {
+    return (
+      <section className="py-24 bg-white">
+        <div className="container mx-auto px-6">
+          <div className="text-center">
+            <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-orange-500 mx-auto"></div>
+          </div>
+        </div>
+      </section>
+    );
+  }
 
   return (
     <section className="py-24 bg-white">
       <div className="container mx-auto px-6">
         <div className="max-w-3xl mx-auto text-center mb-16">
           <span className="inline-block px-4 py-1 rounded-full bg-orange-100 text-orange-600 font-semibold mb-4">
-            Template Pilihan
+            {t("featuredBadge", language)}
           </span>
           <h2 className="text-3xl md:text-4xl font-extrabold text-gray-900 mb-4">
-            Dipilih khusus untuk mempercepat pekerjaan Kamu
+            {t("featuredTitle", language)}
           </h2>
           <p className="text-gray-600">
-            Koleksi template yang paling banyak diunduh dan disukai pelanggan kami.
+            {t("featuredDescription", language)}
           </p>
         </div>
 
-        <CardStack products={featured} label="★ Template Unggulan" />
+        {featured.length > 0 && (
+          <CardStack
+            products={featured}
+            label={t("featuredLabel", language)}
+            ctaLabel={t("ctaViewTemplate", language)}
+          />
+        )}
 
         {free.length > 0 && (
           <div className="mt-20">
             <div className="max-w-2xl mx-auto text-center mb-12">
               <span className="inline-block px-4 py-1 rounded-full bg-emerald-100 text-emerald-600 font-semibold mb-4">
-                Koleksi Gratis
+                {t("freeBadge", language)}
               </span>
               <h3 className="text-2xl font-bold text-gray-900 mb-4">
-                Coba Template Gratis dari RSQUARE
+                {t("freeTitle", language)}
               </h3>
               <p className="text-gray-600">
-                Mulai dengan template versi free untuk merasakan alur kerja RSQUARE.
+                {t("freeDescription", language)}
               </p>
             </div>
-            <CardStack products={free} label="GRATIS" ctaLabel="Ambil Template" />
+            <CardStack
+              products={free}
+              label={t("freeLabel", language)}
+              ctaLabel={t("ctaGetTemplate", language)}
+            />
           </div>
         )}
       </div>

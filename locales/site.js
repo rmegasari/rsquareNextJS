@@ -49,6 +49,58 @@ export const translations = {
     switchToLight: "Beralih ke Mode Terang",
     language: "Bahasa",
     languageToggle: "ID/EN",
+
+    // Contact Page
+    contactTitle: "Hubungi Kami",
+    contactDescription: "Punya pertanyaan, masukan, atau butuh bantuan? Kami siap mendengarkan.",
+    contactFormName: "Nama Kamu",
+    contactFormEmail: "Alamat Email",
+    contactFormMessage: "Ceritakan kebutuhan Kamu",
+    contactFormSubmit: "Kirim Pesan",
+    contactFormSuccess: "Kami akan merespons dalam 1-2 jam kerja melalui email.",
+
+    // Featured Templates Section
+    featuredBadge: "Template Pilihan",
+    featuredTitle: "Dipilih khusus untuk mempercepat pekerjaan Kamu",
+    featuredDescription: "Koleksi template yang paling banyak diunduh dan disukai pelanggan kami.",
+    featuredLabel: "★ Template Unggulan",
+    freeBadge: "Koleksi Gratis",
+    freeTitle: "Coba Template Gratis dari RSQUARE",
+    freeDescription: "Mulai dengan template versi free untuk merasakan alur kerja RSQUARE.",
+    freeLabel: "GRATIS",
+    ctaViewTemplate: "Lihat Template",
+    ctaGetTemplate: "Ambil Template",
+    cardInstruction: "Klik kartu terdepan untuk melihat kartu berikutnya atau pilih kartu lain untuk membawanya ke depan.",
+
+    // FAQ Section
+    faqTitle: "Pertanyaan yang Sering Diajukan",
+    faqSubtitle: "Jawaban singkat untuk membantu Kamu memahami cara kerja layanan RSQUARE.",
+    faq1Q: "Bagaimana cara mendapatkan template yang saya beli?",
+    faq1A: "Setelah pembayaran berhasil, Kamu akan menerima link akses instan ke template Google Sheets. Klik link tersebut dan pilih \"Make a copy\" untuk menyimpannya ke Google Drive Kamu.",
+    faq2Q: "Apakah saya membutuhkan akun Google Workspace berbayar?",
+    faq2A: "Tidak perlu. Semua template RSQUARE kompatibel dengan akun Google gratis. Kamu hanya perlu login ke Google untuk membuat salinan.",
+    faq3Q: "Bisakah saya meminta kustomisasi pada template yang ada?",
+    faq3A: "Bisa! Kamu dapat menghubungi kami melalui halaman Kontak untuk request kustomisasi sesuai kebutuhan alur kerja Kamu.",
+    faq4Q: "Apakah ada panduan penggunaan?",
+    faq4A: "Setiap template dilengkapi panduan tertulis. Banyak template juga memiliki video demo di channel YouTube kami.",
+    faq5Q: "Apa saja yang boleh & tidak boleh saya lakukan dengan template ini?",
+    faq5A: "Kamu bebas memakai template untuk kebutuhan pribadi atau bisnis sendiri. Namun, Kamu tidak boleh menjual kembali, mempublikasikan ulang, atau membagikannya secara gratis.",
+    faq6Q: "Apakah saya akan mendapatkan update & dukungan?",
+    faq6A: "Ya, Kamu akan mendapatkan update perbaikan bug gratis. Untuk penambahan fitur besar, akan ada biaya tambahan. Dukungan tersedia pada hari dan jam kerja melalui halaman Kontak.",
+
+    // Video Showcase Section
+    videoTitle: "Lihat Aksi Template Kami",
+    videoSubtitle: "Tonton walkthrough singkat untuk melihat bagaimana template RSQUARE bekerja dalam hitungan menit.",
+
+    // Mission CTA Section
+    missionTitle: "Misi Kami:",
+    missionHighlight: "Produktivitas untuk Semua",
+    missionDescription: "RSQUARE lahir dari keyakinan bahwa setiap orang berhak memiliki akses ke alat yang kuat dan intuitif. Kami mengubah spreadsheet kompleks menjadi solusi elegan yang siap pakai untuk kesuksesan Kamu.",
+    missionCTA: "Lihat Template Kami",
+    customTitle: "Butuh Sesuatu yang Dibuat Khusus?",
+    customDescription: "Jika alur kerja Kamu unik, kami siap membuatkan template dari nol yang dirancang sempurna untuk bisnis Kamu. Tim kami akan membantu mewujudkan solusi spreadsheet impian Kamu.",
+    customCTA: "📨 Request Template",
+    customCardTitle: "Template Khusus",
   },
   en: {
     // Navbar
@@ -100,6 +152,58 @@ export const translations = {
     switchToLight: "Switch to Light Mode",
     language: "Language",
     languageToggle: "EN/ID",
+
+    // Contact Page
+    contactTitle: "Contact Us",
+    contactDescription: "Have questions, feedback, or need help? We're ready to listen.",
+    contactFormName: "Your Name",
+    contactFormEmail: "Email Address",
+    contactFormMessage: "Tell us your needs",
+    contactFormSubmit: "Send Message",
+    contactFormSuccess: "We will respond within 1-2 business hours via email.",
+
+    // Featured Templates Section
+    featuredBadge: "Featured Templates",
+    featuredTitle: "Specially selected to speed up your work",
+    featuredDescription: "Collection of our most downloaded and loved templates.",
+    featuredLabel: "★ Featured Templates",
+    freeBadge: "Free Collection",
+    freeTitle: "Try Free Templates from RSQUARE",
+    freeDescription: "Start with free version templates to experience RSQUARE workflow.",
+    freeLabel: "FREE",
+    ctaViewTemplate: "View Template",
+    ctaGetTemplate: "Get Template",
+    cardInstruction: "Click the front card to see the next card or select another card to bring it to the front.",
+
+    // FAQ Section
+    faqTitle: "Frequently Asked Questions",
+    faqSubtitle: "Quick answers to help you understand how RSQUARE service works.",
+    faq1Q: "How do I get the template I purchased?",
+    faq1A: "After successful payment, you will receive instant access link to the Google Sheets template. Click the link and select \"Make a copy\" to save it to your Google Drive.",
+    faq2Q: "Do I need a paid Google Workspace account?",
+    faq2A: "No need. All RSQUARE templates are compatible with free Google accounts. You just need to log in to Google to make a copy.",
+    faq3Q: "Can I request customization on existing templates?",
+    faq3A: "Yes! You can contact us through the Contact page to request customization according to your workflow needs.",
+    faq4Q: "Is there a user guide?",
+    faq4A: "Each template comes with written guide. Many templates also have demo videos on our YouTube channel.",
+    faq5Q: "What can and cannot I do with these templates?",
+    faq5A: "You are free to use templates for personal or your own business needs. However, you may not resell, republish, or share them for free.",
+    faq6Q: "Will I get updates & support?",
+    faq6A: "Yes, you will get free bug fix updates. For major feature additions, there will be additional fees. Support is available during business hours through the Contact page.",
+
+    // Video Showcase Section
+    videoTitle: "See Our Templates in Action",
+    videoSubtitle: "Watch short walkthroughs to see how RSQUARE templates work in minutes.",
+
+    // Mission CTA Section
+    missionTitle: "Our Mission:",
+    missionHighlight: "Productivity for Everyone",
+    missionDescription: "RSQUARE was born from the belief that everyone deserves access to powerful and intuitive tools. We transform complex spreadsheets into elegant ready-to-use solutions for your success.",
+    missionCTA: "View Our Templates",
+    customTitle: "Need Something Custom-Made?",
+    customDescription: "If your workflow is unique, we're ready to create templates from scratch perfectly designed for your business. Our team will help bring your dream spreadsheet solution to life.",
+    customCTA: "📨 Request Template",
+    customCardTitle: "Custom Template",
   },
 };
 

@@ -42,25 +42,25 @@ export default function AdminDashboard() {
       title: t("totalTemplates", language),
       value: stats.totalTemplates,
       icon: "📄",
-      color: "bg-gray-700",
+      color: "bg-gray-900",
     },
     {
       title: t("freeTemplates", language),
       value: stats.freeTemplates,
       icon: "🎁",
-      color: "bg-gray-600",
+      color: "bg-gray-900",
     },
     {
       title: t("premiumTemplates", language),
       value: stats.premiumTemplates,
       icon: "💎",
-      color: "bg-gray-800",
+      color: "bg-gray-900",
     },
     {
       title: t("featuredTemplates", language),
       value: stats.featuredTemplates,
       icon: "⭐",
-      color: "bg-orange-500",
+      color: "bg-gray-900",
     },
   ];
 
@@ -70,21 +70,21 @@ export default function AdminDashboard() {
       description: t("addNewTemplateDesc", language),
       icon: "➕",
       href: "/admin/templates/new",
-      color: "bg-orange-500 hover:bg-orange-600",
+      color: "bg-gray-600 hover:bg-gray-900",
     },
     {
       title: t("manageTemplates", language),
       description: t("manageTemplatesDesc", language),
       icon: "📝",
       href: "/admin/templates",
-      color: "bg-gray-700 hover:bg-gray-800",
+      color: "bg-gray-600 hover:bg-gray-900",
     },
     {
       title: t("viewWebsite", language),
       description: t("viewWebsiteDesc", language),
       icon: "🌐",
       href: "/",
-      color: "bg-gray-800 hover:bg-gray-900",
+      color: "bg-gray-600 hover:bg-gray-900",
     },
   ];
 
@@ -100,10 +100,10 @@ export default function AdminDashboard() {
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
         {statCards.map((stat, index) => {
           const colorMap = {
-            'bg-gray-700': { from: '#374151', to: '#1F2937' },
-            'bg-gray-600': { from: '#4B5563', to: '#374151' },
-            'bg-gray-800': { from: '#1F2937', to: '#111827' },
-            'bg-orange-500': { from: '#F97316', to: '#EA580C' },
+            // 'bg-gray-900': { from: '#374151', to: '#1F2937' },
+            // 'bg-gray-900': { from: '#4B5563', to: '#374151' },
+            'bg-gray-900': { from: '#1F2937', to: '#040283ff' },
+            // 'bg-gray-900': { from: '#F97316', to: '#EA580C' },
           };
           const colors = colorMap[stat.color];
 

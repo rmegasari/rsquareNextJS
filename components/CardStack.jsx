@@ -4,6 +4,8 @@ import { useEffect, useMemo, useState, useCallback } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import { resolveAssetPath } from "@/lib/assetPaths";
+import { useSite } from "@/contexts/SiteContext";
+import { t } from "@/locales/site";
 
 const MOBILE_BREAKPOINT = 768;
 const MOBILE_MAX_VISIBLE = 3;
@@ -72,6 +74,7 @@ function computeCardStyle(position, isMobile) {
 }
 
 export default function CardStack({ products, label, ctaLabel = "Lihat Template" }) {
+  const { language } = useSite();
   const [order, setOrder] = useState(() => products.map((_, index) => index));
   const [isAnimating, setIsAnimating] = useState(false);
   const [exitingIndex, setExitingIndex] = useState(null);
@@ -184,8 +187,8 @@ export default function CardStack({ products, label, ctaLabel = "Lihat Template"
           );
         })}
       </div>
-      <p className="mt-4 text-gray-500 italic text-center">
-        Klik kartu terdepan untuk melihat kartu berikutnya atau pilih kartu lain untuk membawanya ke depan.
+      <p className="mt-8 text-gray-500 italic text-center">
+        {t("cardInstruction", language)}
       </p>
     </div>
   );

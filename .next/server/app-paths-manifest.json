@@ -1,4 +1,4 @@
 {
-  "/(site)/page": "app/(site)/page.js",
-  "/(site)/templates/page": "app/(site)/templates/page.js"
+  "/api/products/route": "app/api/products/route.js",
+  "/(site)/page": "app/(site)/page.js"
 }

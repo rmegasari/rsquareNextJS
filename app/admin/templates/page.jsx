@@ -51,6 +51,47 @@ export default function AdminTemplatesPage() {
     setFilteredTemplates(filtered);
   }, [searchQuery, filterType, templates]);
 
+  const handleToggleFeatured = async (productId, currentFeaturedStatus) => {
+    try {
+      const response = await fetch(`/api/products/${productId}`, {
+        method: "GET",
+      });
+
+      if (!response.ok) {
+        throw new Error("Gagal mengambil data template");
+      }
+
+      const product = await response.json();
+
+      // Update featured status
+      const updatedProduct = {
+        ...product,
+        featured: !currentFeaturedStatus,
+      };
+
+      const updateResponse = await fetch("/api/products", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(updatedProduct),
+      });
+
+      if (!updateResponse.ok) {
+        throw new Error("Gagal mengupdate status featured");
+      }
+
+      // Reload templates list
+      const updatedResponse = await fetch("/api/products");
+      const updatedProducts = await updatedResponse.json();
+      setTemplates(updatedProducts);
+      setFilteredTemplates(updatedProducts);
+    } catch (error) {
+      console.error("Error toggling featured:", error);
+      alert(`❌ Gagal mengupdate status featured: ${error.message}`);
+    }
+  };
+
   const handleDelete = async (productId) => {
     if (!confirm("Apakah Anda yakin ingin menghapus template ini?")) {
       return;
@@ -191,6 +232,17 @@ export default function AdminTemplatesPage() {
 
                       {/* Actions */}
                       <div className="flex items-center gap-2">
+                        <button
+                          onClick={() => handleToggleFeatured(template.id, template.featured)}
+                          className={`px-3 py-2 text-sm rounded-lg transition-all hover:scale-105 font-medium ${
+                            template.featured
+                              ? "bg-yellow-100 hover:bg-yellow-200 text-yellow-700"
+                              : "bg-gray-100 hover:bg-gray-200 text-gray-600"
+                          }`}
+                          title={template.featured ? "Remove from Featured" : "Set as Featured"}
+                        >
+                          {template.featured ? "⭐" : "☆"}
+                        </button>
                         <Link
                           href={`/${template.id}`}
                           target="_blank"

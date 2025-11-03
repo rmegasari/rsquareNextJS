@@ -916,6 +916,7 @@ body {
     justify-content: center;
     min-height: 450px;
     padding: 2rem 0;
+    margin-bottom: 3rem; /* Tambahkan margin bawah untuk text instruksi */
 }
 
 .card-stack {
@@ -926,8 +927,16 @@ body {
     margin: 2rem auto;
     width: 90vw;
     max-width: 350px; /* Batas lebar maksimal di layar besar */
+    min-height: 500px; /* Tambahkan min-height untuk memberikan ruang untuk cards */
     cursor: pointer;
     z-index: 10; /* Pastikan di bawah header yang z-50 */
+}
+
+/* Mobile: tambahkan tinggi lebih karena cards ditumpuk vertikal */
+@media (max-width: 768px) {
+    .card-stack {
+        min-height: 550px;
+    }
 }
 
 /* Aturan dasar untuk setiap kartu */
@@ -1141,7 +1150,7 @@ body {
     top: 0;
     height: 100%;
     width: 4px;
-    background: linear-gradient(to bottom, #F97316, #FBBF24);
+    background: linear-gradient(to bottom, #3B82F6, #60A5FA);
     transform: scaleY(0);
     transition: transform 0.3s ease;
 }
@@ -1151,7 +1160,7 @@ body {
 }
 
 .admin-nav-item.active {
-    background: linear-gradient(90deg, rgba(249, 115, 22, 0.15) 0%, transparent 100%);
+    background: linear-gradient(90deg, rgba(59, 130, 246, 0.15) 0%, transparent 100%);
 }
 
 .admin-nav-item:not(.active):hover {
@@ -1285,8 +1294,8 @@ body {
 
 .admin-input:focus {
     outline: none;
-    border-color: #F97316;
-    box-shadow: 0 0 0 4px rgba(249, 115, 22, 0.1);
+    border-color: #3B82F6;
+    box-shadow: 0 0 0 4px rgba(59, 130, 246, 0.1);
 }
 
 .admin-input:hover:not(:focus) {
@@ -1307,13 +1316,13 @@ body {
 
 .admin-select:focus {
     outline: none;
-    border-color: #F97316;
-    box-shadow: 0 0 0 4px rgba(249, 115, 22, 0.1);
+    border-color: #3B82F6;
+    box-shadow: 0 0 0 4px rgba(59, 130, 246, 0.1);
 }
 
 /* Admin Button Styles */
 .admin-btn-primary {
-    background: linear-gradient(135deg, #F97316 0%, #EA580C 100%);
+    background: linear-gradient(135deg, #3B82F6 0%, #2563EB 100%);
     color: white;
     font-weight: 600;
     padding: 0.75rem 1.5rem;
@@ -1321,7 +1330,7 @@ body {
     border: none;
     cursor: pointer;
     transition: all 0.3s ease;
-    box-shadow: 0 4px 12px rgba(249, 115, 22, 0.3);
+    box-shadow: 0 4px 12px rgba(59, 130, 246, 0.3);
     position: relative;
     overflow: hidden;
 }
@@ -1343,7 +1352,7 @@ body {
 
 .admin-btn-primary:hover {
     transform: translateY(-2px);
-    box-shadow: 0 8px 20px rgba(249, 115, 22, 0.4);
+    box-shadow: 0 8px 20px rgba(59, 130, 246, 0.4);
 }
 
 .admin-btn-secondary {
@@ -1532,32 +1541,27 @@ body {
 
 /* Admin Theme Toggle Button */
 .admin-theme-toggle {
-    position: fixed;
-    top: 1.5rem;
-    right: 1.5rem;
-    width: 48px;
-    height: 48px;
-    border-radius: 12px;
-    background: white;
-    border: 1px solid #E5E7EB;
+    width: 100%;
+    height: 40px;
+    border-radius: 8px;
+    background: transparent;
+    border: 1px solid rgba(255, 255, 255, 0.2);
     display: flex;
     align-items: center;
     justify-content: center;
     cursor: pointer;
     transition: all 0.3s ease;
-    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04);
-    z-index: 40;
 }
 
 .admin-theme-toggle:hover {
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.12);
-    transform: scale(1.05);
+    background: rgba(255, 255, 255, 0.1);
+    border-color: rgba(255, 255, 255, 0.3);
 }
 
 .admin-theme-toggle svg {
-    width: 24px;
-    height: 24px;
-    color: #6B7280;
+    width: 20px;
+    height: 20px;
+    color: #E5E7EB;
     transition: all 0.3s ease;
 }
 
@@ -1610,8 +1614,8 @@ body {
 
 [data-theme="dark"] .admin-input:focus,
 [data-theme="dark"] .admin-select:focus {
-    border-color: #F97316;
-    box-shadow: 0 0 0 4px rgba(249, 115, 22, 0.1);
+    border-color: #3B82F6;
+    box-shadow: 0 0 0 4px rgba(59, 130, 246, 0.1);
 }
 
 [data-theme="dark"] .admin-input::placeholder {
@@ -1658,16 +1662,21 @@ body {
 }
 
 [data-theme="dark"] .admin-theme-toggle {
-    background: #1F2937;
-    border-color: #374151;
+    background: transparent;
+    border-color: rgba(255, 255, 255, 0.2);
+}
+
+[data-theme="dark"] .admin-theme-toggle:hover {
+    background: rgba(255, 255, 255, 0.1);
+    border-color: rgba(255, 255, 255, 0.3);
 }
 
 [data-theme="dark"] .admin-theme-toggle svg {
-    color: #F97316;
+    color: #60A5FA;
 }
 
 [data-theme="dark"] .admin-theme-toggle span {
-    color: #F97316;
+    color: #60A5FA;
 }
 
 [data-theme="dark"] h2 {
@@ -1705,18 +1714,6 @@ body {
 
     .admin-sidebar.mobile-open {
         transform: translateX(0);
-    }
-
-    .admin-theme-toggle {
-        top: 1rem;
-        right: 1rem;
-        width: 40px;
-        height: 40px;
-    }
-
-    .admin-theme-toggle svg {
-        width: 20px;
-        height: 20px;
     }
 }
 

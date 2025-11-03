@@ -1,6 +1,8 @@
 "use client";
 
 import { useState, useRef, useEffect } from "react";
+import { useSite } from "@/contexts/SiteContext";
+import { t } from "@/locales/site";
 
 const VIDEOS = [
   {
@@ -30,6 +32,7 @@ const VIDEOS = [
 ];
 
 export default function VideoShowcase() {
+  const { language } = useSite();
   const [currentIndex, setCurrentIndex] = useState(0);
   const iframeRef = useRef(null);
 
@@ -67,9 +70,9 @@ export default function VideoShowcase() {
     <section id="youtube" className="py-20 px-6 bg-gray-50">
       <div className="container mx-auto">
         <div className="max-w-3xl mx-auto text-center mb-12" data-animate-on-scroll>
-          <h2 className="text-3xl font-bold text-gray-900">Lihat Aksi Template Kami</h2>
+          <h2 className="text-3xl font-bold text-gray-900">{t("videoTitle", language)}</h2>
           <p className="text-gray-600 mt-4">
-            Tonton walkthrough singkat untuk melihat bagaimana template RSQUARE bekerja dalam hitungan menit.
+            {t("videoSubtitle", language)}
           </p>
         </div>
 

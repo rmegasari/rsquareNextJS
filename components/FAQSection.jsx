@@ -1,61 +1,58 @@
 "use client";
 
 import { useState } from "react";
-
-const FAQS = [
-  {
-    question: "Bagaimana cara mendapatkan template yang saya beli?",
-    answer:
-      "Setelah pembayaran berhasil, Kamu akan menerima link akses instan ke template Google Sheets. Klik link tersebut dan pilih “Make a copy” untuk menyimpannya ke Google Drive Kamu.",
-  },
-  {
-    question: "Apakah saya membutuhkan akun Google Workspace berbayar?",
-    answer:
-      "Tidak perlu. Semua template RSQUARE kompatibel dengan akun Google gratis. Kamu hanya perlu login ke Google untuk membuat salinan.",
-  },
-  {
-    question: "Bisakah saya meminta kustomisasi pada template yang ada?",
-    answer:
-      "Bisa! Kamu dapat menghubungi kami melalui halaman Kontak untuk request kustomisasi sesuai kebutuhan alur kerja Kamu.",
-  },
-  {
-    question: "Apakah ada panduan penggunaan?",
-    answer:
-      "Setiap template dilengkapi panduan tertulis. Banyak template juga memiliki video demo di channel YouTube kami.",
-  },
-  {
-    question: "Apa saja yang boleh & tidak boleh saya lakukan dengan template ini?",
-    answer:
-      "Kamu bebas memakai template untuk kebutuhan pribadi atau bisnis sendiri. Namun, Kamu tidak boleh menjual kembali, mempublikasikan ulang, atau membagikannya secara gratis.",
-  },
-  {
-    question: "Apakah saya akan mendapatkan update & dukungan?",
-    answer:
-      "Ya, Kamu akan mendapatkan update perbaikan bug gratis. Untuk penambahan fitur besar, akan ada biaya tambahan. Dukungan tersedia pada hari dan jam kerja melalui halaman Kontak.",
-  },
-];
+import { useSite } from "@/contexts/SiteContext";
+import { t } from "@/locales/site";
 
 export default function FAQSection() {
+  const { language } = useSite();
   const [openIndex, setOpenIndex] = useState(null);
 
   const toggleIndex = (index) => {
     setOpenIndex((prev) => (prev === index ? null : index));
   };
 
+  const FAQS = [
+    {
+      question: t("faq1Q", language),
+      answer: t("faq1A", language),
+    },
+    {
+      question: t("faq2Q", language),
+      answer: t("faq2A", language),
+    },
+    {
+      question: t("faq3Q", language),
+      answer: t("faq3A", language),
+    },
+    {
+      question: t("faq4Q", language),
+      answer: t("faq4A", language),
+    },
+    {
+      question: t("faq5Q", language),
+      answer: t("faq5A", language),
+    },
+    {
+      question: t("faq6Q", language),
+      answer: t("faq6A", language),
+    },
+  ];
+
   return (
     <section id="faq" className="py-20 px-6">
       <div className="container mx-auto max-w-5xl">
         <div className="text-center mb-12" data-animate-on-scroll>
-          <h2 className="text-3xl font-bold text-gray-900">Pertanyaan yang Sering Diajukan</h2>
+          <h2 className="text-3xl font-bold text-gray-900">{t("faqTitle", language)}</h2>
           <p className="text-gray-600 mt-4">
-            Jawaban singkat untuk membantu Kamu memahami cara kerja layanan RSQUARE.
+            {t("faqSubtitle", language)}
           </p>
         </div>
         <div className="space-y-4" data-animate-on-scroll>
           {FAQS.map((item, index) => {
             const isOpen = openIndex === index;
             return (
-              <div className="card rounded-xl" key={item.question}>
+              <div className="card rounded-xl" key={index}>
                 <button
                   type="button"
                   onClick={() => toggleIndex(index)}

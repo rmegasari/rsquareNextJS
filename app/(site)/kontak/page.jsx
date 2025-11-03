@@ -1,17 +1,20 @@
-export const metadata = {
-  title: "Kontak Kami",
-  description:
-    "Hubungi tim RSQUARE untuk pertanyaan, masukan, atau diskusi mengenai template. Kami siap membantu Kamu menemukan solusi spreadsheet terbaik.",
-};
+"use client";
+
+import { useSite } from "@/contexts/SiteContext";
+import { t } from "@/locales/site";
 
 export default function KontakPage() {
+  const { language } = useSite();
+
   return (
     <div className="py-20 px-6">
       <div className="container mx-auto max-w-2xl">
         <header className="text-center mb-12" data-animate-on-scroll>
-          <h1 className="text-4xl md:text-5xl font-extrabold mb-4 gradient-text pb-2">Hubungi Kami</h1>
+          <h1 className="text-4xl md:text-5xl font-extrabold mb-4 gradient-text pb-2">
+            {t("contactTitle", language)}
+          </h1>
           <p className="text-lg text-gray-600">
-            Punya pertanyaan, masukan, atau butuh bantuan? Kami siap mendengarkan.
+            {t("contactDescription", language)}
           </p>
         </header>
         <div className="card p-8 md:p-10 rounded-2xl" data-animate-on-scroll>
@@ -30,7 +33,7 @@ export default function KontakPage() {
             </p>
             <div>
               <label htmlFor="name" className="block text-sm font-medium text-gray-700 mb-2">
-                Nama Kamu
+                {t("contactFormName", language)}
               </label>
               <input
                 type="text"
@@ -42,7 +45,7 @@ export default function KontakPage() {
             </div>
             <div>
               <label htmlFor="email" className="block text-sm font-medium text-gray-700 mb-2">
-                Alamat Email
+                {t("contactFormEmail", language)}
               </label>
               <input
                 type="email"
@@ -54,7 +57,7 @@ export default function KontakPage() {
             </div>
             <div>
               <label htmlFor="message" className="block text-sm font-medium text-gray-700 mb-2">
-                Ceritakan kebutuhan Kamu
+                {t("contactFormMessage", language)}
               </label>
               <textarea
                 id="message"
@@ -65,10 +68,10 @@ export default function KontakPage() {
               />
             </div>
             <button type="submit" className="btn-primary btn-shiny w-full px-6 py-3 rounded-lg font-semibold text-white">
-              Kirim Pesan
+              {t("contactFormSubmit", language)}
             </button>
             <p className="text-sm text-gray-500 text-center">
-              Kami akan merespons dalam 1×24 jam kerja melalui email.
+              {t("contactFormSuccess", language)}
             </p>
           </form>
         </div>
