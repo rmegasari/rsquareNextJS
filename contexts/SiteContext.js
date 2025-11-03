@@ -15,6 +15,12 @@ export function SiteProvider({ children }) {
     const savedTheme = localStorage.getItem("site-theme") || "light";
     setTheme(savedTheme);
     document.documentElement.setAttribute("data-theme", savedTheme);
+    // Add/remove 'dark' class for Tailwind dark mode
+    if (savedTheme === "dark") {
+      document.documentElement.classList.add("dark");
+    } else {
+      document.documentElement.classList.remove("dark");
+    }
 
     // Load language from localStorage
     const savedLanguage = localStorage.getItem("site-language") || "id";
@@ -26,6 +32,12 @@ export function SiteProvider({ children }) {
     setTheme(newTheme);
     localStorage.setItem("site-theme", newTheme);
     document.documentElement.setAttribute("data-theme", newTheme);
+    // Add/remove 'dark' class for Tailwind dark mode
+    if (newTheme === "dark") {
+      document.documentElement.classList.add("dark");
+    } else {
+      document.documentElement.classList.remove("dark");
+    }
   };
 
   const toggleLanguage = () => {
