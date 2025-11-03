@@ -1,0 +1,1898 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* Import Font Poppins */
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap');
+
+/* ==========================================================================
+   BODY & ANIMASI UTAMA
+   ========================================================================== */
+[data-animate-on-scroll] {
+    opacity: 0;
+    transform: translateY(24px);
+    transition: opacity 0.6s ease, transform 0.6s ease;
+}
+
+[data-animate-on-scroll].is-visible {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+html {
+    scroll-behavior: smooth;
+}
+body {
+    font-family: 'Poppins', sans-serif;
+    color: #1F2937;
+    overflow-x: hidden;
+    /* KEMBALIKAN KE WARNA SOLID YANG BERSIH */
+    background-color: #F9FAFB; /* Abu-abu sangat terang */
+}
+/*
+=========================================================================
+   KOMPONEN UTAMA
+   ========================================================================== */
+.gradient-text {
+    background: linear-gradient(to right, #FBBF24, #F97316);
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+}
+
+/* ========================================================================
+   GAYA KARTU BARU - EFEK "ILLUMINATED GLASS" (Gaya n8n)
+   ======================================================================== */
+
+/* Desain Kartu Final (Gaya Solid & Bersih) */
+/* Desain Kartu Final (dengan Bayangan Berwarna) */
+.card {
+    background: #FFFFFF;
+    border: 1px solid #E5E7EB;
+    /* BAYANGAN BARU: Efek glow oranye yang lembut */
+    box-shadow: 0 0 25px -5px rgba(249, 115, 22, 0.2);
+    transition: transform 0.3s ease-out, box-shadow 0.3s ease-out;
+}
+
+.card:hover {
+    transform: translateY(-5px);
+    /* BAYANGAN HOVER BARU: Efek glow menjadi lebih kuat */
+    box-shadow: 0 0 35px -5px rgba(249, 115, 22, 0.4);
+}
+
+/* 
+/* ========================================================================
+   GAYA TOMBOL (Versi Final Lengkap)
+   ======================================================================== */
+
+/* --- GAYA DASAR --- */
+
+/* Tombol Utama (Oranye Solid) */
+.btn-primary {
+    position: relative;
+    overflow: hidden;
+    background: linear-gradient(to right, #F97316, #EA580C);
+    color: #FFFFFF;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 15px rgba(249, 115, 22, 0.3);
+}
+.btn-primary:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 8px 25px rgba(249, 115, 22, 0.4);
+}
+
+/* ========================================================================
+   GAYA TOMBOL DENGAN EFEK GRADASI BERULANG
+   ======================================================================== */
+.btn-primary-small {
+    position: relative;
+    overflow: hidden;
+    z-index: 1;
+    background: #F97316; /* Warna solid awal */
+    color: white;
+    padding: 10px 16px;
+    border-radius: 8px;
+    text-decoration: none;
+    font-weight: 600;
+    display: inline-block;
+    transition: all 0.3s ease;
+    align-self: flex-start;
+}
+
+.btn-primary-small:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(249, 115, 22, 0.4);
+}
+
+.btn-primary-small::before {
+    content: '';
+    position: absolute;
+    inset: -2px; /* Sedikit lebih besar dari tombol */
+    z-index: -1;
+    border-radius: 10px; /* Sudut membulat yang sedikit lebih besar */
+    /* Gradasi warna yang bergerak */
+    background: linear-gradient(90deg, #F97316, #a371f7, #2563eb, #F97316);
+    background-size: 200% 100%;
+    animation: flow-gradient 3s linear infinite; /* Animasi bergerak berulang */
+    opacity: 0;
+    transition: opacity 0.3s ease-in-out;
+}
+
+
+.btn-primary-small:hover::before {
+    opacity: 1;
+}
+
+@keyframes flow-gradient {
+    0% { background-position: -100% 50%; }
+    100% { background-position: 100% 50%; }
+}
+
+
+/* Tombol Sekunder (Outline Oranye) */
+.btn-secondary {
+    position: relative;
+    overflow: hidden;
+    background-color: transparent;
+    border: 2px solid #F97316;
+    color: #F97316;
+    transition: all 0.3s ease;
+}
+.btn-secondary:hover {
+    background-color: #F97316;
+    color: #FFFFFF;
+    transform: translateY(-3px);
+}
+
+/* Tombol Hitam (Dark) */
+.btn-dark {
+    background-color: #EA580C;
+    color: #FFFFFF;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 15px rgba(249, 115, 22, 0.3);
+}
+.btn-dark:hover {
+    background-color: #F97316;
+    transform: translateY(-3px);
+    box-shadow: 0 8px 25px rgba(249, 115, 22, 0.4);
+}
+
+
+/* --- EFEK ANIMASI TAMBAHAN --- */
+
+/* EFEK 1: Gradasi Mengikuti Kursor (untuk .btn-primary & .btn-secondary) */
+.btn-primary::before, .btn-secondary::before {
+    content: '';
+    position: absolute;
+    left: var(--mouse-x, -100px);
+    top: var(--mouse-y, -100px);
+    width: 200px;
+    height: 200px;
+    background: radial-gradient(circle at center, rgba(255, 255, 255, 0.25) 0%, rgba(255, 255, 255, 0) 60%);
+    transform: translate(-50%, -50%);
+    opacity: 0;
+    transition: opacity 0.3s ease;
+}
+
+/* Legal content helper */
+.content-area h2 {
+    font-size: 1.875rem;
+    font-weight: 700;
+    margin-top: 2rem;
+    margin-bottom: 1rem;
+    border-bottom: 1px solid #e5e7eb;
+    padding-bottom: 0.5rem;
+    color: #1f2937;
+}
+
+.content-area p,
+.content-area li {
+    font-size: 1.125rem;
+    line-height: 1.75;
+    color: #4b5563;
+    margin-bottom: 1rem;
+}
+
+.content-area ul {
+    list-style-type: disc;
+    padding-left: 1.5rem;
+}
+.btn-primary:hover::before, .btn-secondary:hover::before {
+    opacity: 1;
+}
+
+
+/*    EFEK FINAL: Kilap & Perubahan Warna (Hanya untuk .btn-shiny)
+   ======================================================================== */
+
+/* EFEK 3: Kilap Berulang (EKSKLUSIF untuk .btn-shiny) */
+.btn-shiny {
+    position: relative;
+    overflow: hidden;
+    z-index: 1;
+}
+.btn-shiny::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    width: 50%;
+    height: 100%;
+    background: linear-gradient(to right, rgba(255, 255, 255, 0) 0%, rgba(255, 255, 255, 0.4) 50%, rgba(255, 255, 255, 0) 100%);
+    transform: skewX(-25deg);
+    animation: shine 3s ease-in-out infinite;
+    animation-delay: 1s;
+    z-index: 0; /* Pastikan di bawah teks */
+}
+@keyframes shine {
+    0% { left: -100%; }
+    100% { left: 150%; }
+}
+
+/* ========================================================================
+   EFEK BARU: Tombol "Glow" Interaktif
+   ======================================================================== */
+
+/* Wadah untuk tombol agar efek glow tidak terpotong */
+.btn-container {
+    position: relative;
+}
+
+/* Tombol utama (hanya gaya dasar, tanpa animasi) */
+.btn-primary {
+    color: #FFFFFF;
+    background: linear-gradient(to right, #F97116, #EA580C);
+    box-shadow: 0 4px 15px rgba(249, 115, 22, 0.3);
+    transition: all 0.3s ease;
+}
+.btn-primary:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 8px 25px rgba(249, 115, 22, 0.4);
+}
+
+/* Pseudo-element untuk menciptakan efek "glow" */
+.btn-container::before {
+    content: '';
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    width: 120%; /* Sedikit lebih besar dari tombol */
+    height: 150%; /* Sedikit lebih besar dari tombol */
+    
+    /* Gradasi cahaya yang lembut */
+    background: radial-gradient(circle at var(--mouse-x, 50%) var(--mouse-y, 50%), rgba(249, 115, 22, 0.6), transparent 70%);
+    
+    transform: translate(-50%, -50%);
+    opacity: 0;
+    transition: opacity 0.4s ease;
+}
+
+/* Tampilkan glow saat kursor masuk ke area wadah */
+.btn-container:hover::before {
+    opacity: 1;
+}
+/* ========================================================================
+   EFEK FINAL: Tombol Terbang dengan Garis Angin
+   ======================================================================== */
+
+/* Kelas utama untuk memicu kedua animasi */
+.btn-fly-animated {
+    position: relative; /* Wajib agar garis angin bisa diposisikan */
+    overflow: visible;  /* Diubah agar garis angin terlihat di luar tombol */
+    animation: fly-effect 4s ease-in-out infinite;
+}
+
+/* Pseudo-element untuk membuat "garis angin" */
+.btn-fly-animated::before {
+    content: '';
+    position: absolute;
+    top: 50%;
+    right: 105%; /* Posisi awal garis di kiri tombol */
+    width: 25px;
+    height: 2px;
+    background-color: #f97316; /* Warna oranye */
+    opacity: 0;
+    box-shadow: 
+        5px 5px 0 0 #fbbf24,  /* Garis kedua (emas) */
+        5px -5px 0 0 #f97316; /* Garis ketiga (oranye) */
+    
+    /* Memicu animasi garis angin */
+    animation: wind-lines 4s ease-out infinite;
+}
+
+/* Definisi animasi melayang & maju-mundur (fly-effect) */
+@keyframes fly-effect {
+    0%   { transform: translate(0, 0); }
+    25%  { transform: translate(8px, -8px); }
+    50%  { transform: translate(0, 0); }
+    75%  { transform: translate(8px, 8px); }
+    100% { transform: translate(0, 0); }
+}
+
+/* Definisi animasi garis angin (muncul & menghilang) */
+@keyframes wind-lines {
+    0%   { transform: translateX(15px); opacity: 0; }
+    25%  { transform: translateX(0); opacity: 1; }
+    50%  { transform: translateX(-15px); opacity: 0; }
+    100% { opacity: 0; }
+}
+
+/* ========================================================================
+   GAYA TOMBOL SCROLL TO TOP
+   ======================================================================== */
+#scrollTopBtn {
+    display: none; /* Sembunyi secara default */
+    position: fixed;
+    bottom: 30px;
+    right: 30px;
+    z-index: 99;
+    border: none;
+    outline: none;
+    background-color: #F97316; /* Warna oranye */
+    color: white;
+    cursor: pointer;
+    padding: 15px;
+    border-radius: 50%; /* Membuatnya bulat */
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+    transition: opacity 0.3s, visibility 0.3s, transform 0.3s;
+}
+
+#scrollTopBtn:hover {
+    background-color: #EA580C; /* Oranye lebih gelap saat hover */
+    transform: translateY(-3px); /* Efek sedikit terangkat saat hover */
+}
+
+/* ========================================================================
+   EFEK BARU: Spotlight Fill (untuk Tombol Hitam)
+   ======================================================================== */
+
+.btn-spotlight {
+    position: relative; /* Wajib untuk efek */
+    overflow: hidden;   /* Wajib, agar efek tidak keluar dari tombol */
+    z-index: 1;         /* Agar teks tombol selalu di atas */
+}
+
+.btn-spotlight::before {
+    content: '';
+    position: absolute;
+    left: var(--mouse-x, 50%);
+    top: var(--mouse-y, 50%);
+    
+    width: 0;
+    height: 0;
+    
+    background: radial-gradient(circle, #EA580C 0%, #F97316 100%);
+    border-radius: 50%;
+    
+    transform: translate(-50%, -50%);
+    transition: width 0.4s ease, height 0.4s ease;
+    z-index: -1;
+}
+
+.btn-spotlight:hover::before {
+    width: 400px;  /* Ukuran lingkaran cahaya saat membesar */
+    height: 400px;
+}
+
+/* ========================================================================
+   ANIMASI MENU MOBILE (Slide Down Halus)
+   ======================================================================== */
+
+#mobile-menu {
+    max-height: 0; /* Mulai dari tinggi 0 (tersembunyi) */
+    transition: max-height 0.5s ease-in-out; /* Animasi transisi yang halus */
+    overflow: hidden; /* Sembunyikan konten saat menu tertutup */
+}
+
+/* ========================================================================
+   GAYA TOMBOL CTA JASA WEBSITE
+   ======================================================================== */
+
+.btn-cta-service {
+    background-color: #1F2937; /* Latar belakang hitam/abu gelap */
+    border: 2px solid transparent;
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+}
+
+.btn-cta-service:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 15px 30px rgba(0, 0, 0, 0.2);
+}
+
+/* Lapisan untuk efek gradasi melayang */
+.btn-cta-service::before {
+    content: '';
+    position: absolute;
+    inset: -2px; /* Sedikit lebih besar dari tombol */
+    z-index: -1;
+    border-radius: 1.25rem; /* Sedikit lebih besar dari rounded-2xl */
+    background: linear-gradient(90deg, #F97316, #a371f7, #2563eb, #F97316);
+    background-size: 400% 100%;
+    animation: flowing-border 10s linear infinite;
+    opacity: 0;
+    transition: opacity 0.3s ease-in-out;
+}
+
+.btn-cta-service:hover::before {
+    opacity: 1;
+}
+
+@keyframes flowing-border {
+    0% { background-position: 0% 50%; }
+    100% { background-position: 400% 50%; }
+}
+
+
+
+/* /* ========================================================================
+   GAYA UNTUK TOOLTIP PENJELASAN
+   ======================================================================== */
+.tooltip-container {
+    position: relative;
+    display: inline-flex; /* Menggunakan inline-flex agar ikon sejajar */
+    align-items: center;
+    cursor: help;
+}
+
+/* Kotak tooltip yang tersembunyi */
+.tooltip-text {
+    visibility: hidden;
+    width: 250px;
+    background-color: #1F2937;
+    color: #fff;
+    text-align: center;
+    border-radius: 6px;
+    padding: 10px;
+    position: absolute;
+    z-index: 10;
+    bottom: 125%;
+    left: 50%;
+    margin-left: -125px;
+    opacity: 0;
+    transition: opacity 0.3s;
+}
+
+/* Panah kecil di bawah tooltip */
+.tooltip-text::after {
+    content: "";
+    position: absolute;
+    top: 100%;
+    left: 50%;
+    margin-left: -5px;
+    border-width: 5px;
+    border-style: solid;
+    border-color: #1F2937 transparent transparent transparent;
+}
+
+/* Tampilkan tooltip saat hover */
+.tooltip-container:hover .tooltip-text {
+    visibility: visible;
+    opacity: 1;
+}
+
+/* =/* /* /* ========================================================================
+   GAYA FOOTER BARU DENGAN GRADASI "WARM GREY"
+   ======================================================================== */
+.footer-gradient {
+    /* Gradasi abu-abu terang ke peach/oranye pucat */
+    background: linear-gradient(to top, #FFF7F2, #F9FAFB); 
+    border-top: 1px solid #E5E7EB;
+    color: #4B5563; /* Warna teks abu-abu gelap */
+}
+
+/* Mengubah warna link di dalam footer */
+.footer-gradient a {
+    color: #374151;
+    transition: color 0.3s ease;
+}
+.footer-gradient a:hover {
+    color: #F97316; /* Warna oranye saat hover */
+}
+
+/* Mengubah warna judul di dalam footer */
+.footer-gradient h3 {
+    color: #111827; /* Warna hitam pekat */
+}
+
+/* ========================================================================
+   GAYA UNTUK ANIMASI GALERI BERGERAK (MARQUEE)
+   ======================================================================== */
+
+.marquee {
+    overflow: hidden; /* Sembunyikan gambar saat di luar frame */
+    position: relative;
+    width: 100%;
+}
+
+/* Efek memudar di ujung kiri dan kanan */
+.marquee::before,
+.marquee::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    width: 10rem; /* Lebar area pudar */
+    z-index: 2;
+    pointer-events: none;
+}
+.marquee::before {
+    left: 0;
+    background: linear-gradient(to right, #F9FAFB, transparent);
+}
+.marquee::after {
+    right: 0;
+    background: linear-gradient(to left, #F9FAFB, transparent);
+}
+
+.marquee-content {
+    display: flex;
+    animation-duration: 20s;
+    animation-timing-function: linear;
+    animation-iteration-count: infinite;
+}
+
+.marquee-item {
+    flex-shrink: 0;
+    margin: 0 0.5rem; /* Jarak antar gambar di mobile (8px) */
+    width: 180px; /* Lebar gambar di mobile (LEBIH KECIL) */
+    height: 135px; /* Tinggi gambar di mobile (rasio 4:3) */
+}
+
+/* Aturan HANYA untuk layar besar (desktop) */
+@media (min-width: 768px) {
+    .marquee-item {
+        margin: 0 1rem; /* Jarak antar gambar di desktop (16px) */
+        width: 320px; /* Lebar gambar di desktop (LEBIH BESAR) */
+        height: 240px; /* Tinggi gambar di desktop */
+    }
+}
+
+
+
+.marquee-item img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover; /* Agar gambar pas tanpa distorsi */
+    border-radius: 0.75rem; /* Sudut membulat */
+    border: 1px solid #e5e7eb;
+}
+
+/* ========================================================================
+   ANIMASI GALERI BERGERAK (Versi Seamless Loop)
+   ======================================================================== */
+
+/* Animasi untuk baris atas (kiri ke kanan) */
+.scroll-left {
+    animation: scroll-left 30s linear infinite;
+}
+@keyframes scroll-left {
+    from { transform: translateX(0); }
+    to { transform: translateX(-50%); }
+}
+
+/* Animasi untuk baris bawah (kanan ke kiri) */
+.scroll-right {
+    animation: scroll-right 30s linear infinite;
+}
+@keyframes scroll-right {
+    from { transform: translateX(-50%); }
+    to { transform: translateX(0); }
+}
+
+/* ========================================================================
+   GAYA KARTU TEMPLATE UNGGULAN (Revisi Akhir Final)
+   ======================================================================== */
+
+.featured-card {
+    background-color: white;
+    overflow: hidden;
+    height: 350px;
+    /* Lebar kartu akan diatur oleh Grid, bukan style inline */
+    width: 100%;
+    border-radius: 1rem;
+    box-shadow: 0 4px 15px rgba(249, 115, 22, 0.2);
+    transition: all 0.4s ease-out;
+    cursor: pointer;
+    display: flex;
+    flex-direction: column;
+}
+
+.featured-card:hover {
+    height: 470px; /* Atur tinggi yang melebar ke bawah saat hovered */
+    transform: translateY(-10px) rotateX(5deg);
+    box-shadow: 0 20px 30px rgba(249, 115, 22, 0.4);
+}
+
+.featured-card-image {
+    width: 100%;
+    height: 200px;
+    object-fit: cover;
+    object-position: top;
+    border-top-left-radius: 1rem;
+    border-top-right-radius: 1rem;
+    flex-shrink: 0;
+}
+
+.featured-card-content {
+    padding: 1.5rem;
+    display: flex;
+    flex-direction: column;
+    height: auto;
+    perspective: 1000px;
+}
+
+.featured-card-content h3 {
+    font-size: 1.25rem;
+    font-weight: bold;
+    color: #111827;
+    margin-bottom: 0.5rem;
+}
+
+.featured-card-content .label {
+    font-size: 0.8rem;
+    color: #2563EB;
+    font-weight: 600;
+    margin-bottom: 0.5rem;
+    display: block;
+}
+
+/* Bagian deskripsi dan tombol yang akan muncul saat hover */
+.featured-card-description-wrapper {
+    max-height: 0;
+    opacity: 0;
+    overflow: hidden;
+    padding-bottom: 0;
+    transition: max-height 0.4s ease-in-out, opacity 0.4s ease-in-out, padding-bottom 0.4s ease-in-out;
+}
+
+.featured-card.is-hovered .featured-card-description-wrapper {
+    max-height: 250px;
+    opacity: 1;
+    padding-bottom: 1rem;
+}
+
+.featured-card-description {
+    font-size: 0.95rem;
+    color: #4B5563;
+    margin-bottom: 1rem;
+}
+
+
+.card-template {
+  background: white;
+  border-radius: 16px;
+  box-shadow: 0 8px 24px rgba(255, 122, 0, 0.25); /* shadow oranye */
+  overflow: hidden;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.card-template:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 12px 28px rgba(255, 122, 0, 0.4);
+}
+
+.card-template img {
+  width: 100%;
+  height: 200px;
+  object-fit: cover;
+  object-position: top;
+  border-top-left-radius: 16px;
+  border-top-right-radius: 16px;
+}
+
+.card-template .content {
+  padding: 20px;
+}
+
+.card-template h3 {
+  font-size: 1.25rem;
+  font-weight: bold;
+  margin-bottom: 10px;
+  color: #111827;
+}
+
+.card-template p {
+  font-size: 0.95rem;
+  color: #4B5563;
+  margin-bottom: 16px;
+}
+
+.card-template .label {
+  font-size: 0.8rem;
+  color: #2563EB;
+  font-weight: 600;
+  margin-bottom: 5px;
+  display: block;
+}
+
+.card-template .btn {
+  background-color: #ff6a00;
+  color: white;
+  padding: 10px 16px;
+  border-radius: 8px;
+  text-decoration: none;
+  font-weight: 600;
+  display: inline-block;
+}
+.section-black {
+  background: linear-gradient(to bottom, #111827, #1f2937);
+  color: white;
+  padding: 60px 20px;
+  text-align: center;
+}
+
+.section-black h2 {
+  font-size: 2rem;
+  margin-bottom: 10px;
+}
+
+.section-black p {
+  font-size: 1rem;
+  color: #d1d5db;
+  max-width: 600px;
+  margin: 0 auto 24px;
+}
+
+.btn-cta {
+  background-color: #ff6a00;
+  padding: 12px 24px;
+  color: white;
+  border-radius: 8px;
+  font-weight: bold;
+  text-decoration: none;
+  transition: background 0.3s ease;
+}
+
+.btn-cta:hover {
+  background-color: #e55a00;
+}
+
+/* ========================================================================
+   GAYA UNTUK FRAME CTA & MISI (VERSI TERANG)
+   ======================================================================== */
+.combined-cta-frame-light {
+    /* Gradasi lembut dari putih ke oranye sangat pucat */
+    background: linear-gradient(135deg, #FFFFFF, #FFF7F2);
+    /* Bayangan lembut berwarna oranye agar menonjol */
+    box-shadow: 0 15px 40px -15px rgba(234, 88, 12, 0.2);
+    border: 1px solid #F3F4F6; /* Garis tepi yang sangat tipis */
+}
+
+/* ========================================================================
+   ANIMASI UNTUK ILUSTRASI HEADER (FADE IN DARI KIRI)
+   ======================================================================== */
+
+/* Mendefinisikan langkah-langkah animasi */
+@keyframes fadeInFromLeft {
+  /* Kondisi awal: gambar bergeser sedikit ke kiri dan transparan total */
+  0% {
+    transform: translateX(-50px);
+    opacity: 0;
+  }
+  
+  /* Kondisi akhir: gambar di posisi normal dengan transparansi 20% */
+  100% {
+    transform: translateX(0);
+    opacity: 0.2; /* Sesuaikan dengan opacity di HTML jika berbeda */
+  }
+}
+
+/* Kelas yang akan kita panggil di HTML untuk menerapkan animasi */
+.animate-fade-in-left {
+  animation: fadeInFromLeft 1.5s ease-out forwards;
+}
+
+/* ======================================================
+   EFEK GRADASI BERGERAK UNTUK LINK
+   ====================================================== */
+.link-animated-gradient {
+    /* Gradasi warna dari kuning cerah ke putih, lalu kembali ke kuning */
+    background-image: linear-gradient(
+        90deg, 
+        #fde047, /* Kuning cerah */
+        #ffffff, /* Putih */
+        #fde047  /* Kuning cerah lagi */
+    );
+    background-size: 200% 100%; /* Buat gradasi 2x lebih lebar dari teksnya */
+    -webkit-background-clip: text;
+    -moz-background-clip: text;
+    background-clip: text;
+    color: transparent; /* Teks dibuat transparan agar gradasi terlihat */
+    animation: move-gradient 3s linear infinite; /* Panggil animasi bergerak */
+    font-weight: 700; /* Dibuat tebal agar lebih terlihat */
+    text-transform: uppercase;
+}
+
+@keyframes move-gradient {
+    0% {
+        background-position: 0% 50%;
+    }
+    100% {
+        background-position: -200% 50%; /* Geser posisi background gradasi */
+    }
+}
+
+/* ========================================================================
+   GAYA TATA LETAK GRID UNTUK KARTU
+   ======================================================================== */
+.template-grid {
+    display: grid;
+    /* Atur kolom agar muat 340px dan fleksibel mengisi ruang */
+    grid-template-columns: repeat(auto-fit, minmax(340px, 1fr));
+    gap: 24px;
+    justify-items: center;
+}
+
+/* ========================================================================
+   CONTOH ANIMASI LOADING SVG (EQUALIZER)
+   ======================================================================== */
+
+#svg-loader .loader-bar {
+  /* Titik pusat animasi berada di tengah secara horizontal dan di bawah secara vertikal */
+  transform-origin: center bottom;
+  
+  /* Panggil animasi 'equalize' */
+  animation: equalize 1.2s ease-in-out infinite;
+}
+
+/* Beri jeda animasi untuk baris kedua dan ketiga agar tidak bergerak bersamaan */
+#svg-loader .loader-bar:nth-child(2) {
+  animation-delay: -1.0s; /* Jeda animasi */
+}
+
+#svg-loader .loader-bar:nth-child(3) {
+  animation-delay: -0.8s; /* Jeda animasi */
+}
+
+/* Definisi animasi 'equalize' (naik-turun) */
+@keyframes equalize {
+  0% {
+    transform: scaleY(0.2); /* Tinggi awal (20%) */
+  }
+  50% {
+    transform: scaleY(1.0); /* Tinggi penuh (100%) */
+  }
+  100% {
+    transform: scaleY(0.2); /* Kembali ke tinggi awal */
+  }
+}
+
+
+/* ========================================================================
+   GAYA TOMBOL SEKUNDER DENGAN ANIMATED BORDER
+   ======================================================================== */
+
+.btn-secondary-animated-border {
+    position: relative; /* Wajib agar pseudo-element bisa diposisikan */
+    z-index: 1; /* Pastikan konten tombol di atas efek */
+    background-color: transparent;
+    border: 2px solid #F97316;
+    color: #F97316;
+    transition: all 0.3s ease;
+}
+
+/* Saat di-hover, tombol tetap terisi warna oranye seperti biasa */
+.btn-secondary-animated-border:hover {
+    background-color: #F97316;
+    color: #FFFFFF;
+    transform: translateY(-3px);
+}
+
+/* Ini adalah pseudo-element yang menciptakan efek border bergerak */
+.btn-secondary-animated-border::before {
+    content: '';
+    position: absolute;
+    inset: -2px; /* Sedikit lebih besar dari tombol agar border terlihat */
+    z-index: -1;
+    border-radius: 10px; /* Sesuaikan dengan border-radius tombol Kamu (8px + 2px) */
+    
+    /* Gradasi warna yang akan bergerak */
+    background: linear-gradient(90deg, #FBBF24, #F97316, #a371f7, #2563eb, #FBBF24);
+    background-size: 400% 100%;
+    
+    /* Panggil animasi */
+    animation: flowing-border 8s linear infinite;
+    
+    opacity: 0; /* Sembunyi secara default */
+    transition: opacity 0.3s ease-in-out;
+}
+
+/* Tampilkan border animasi saat kursor di atas tombol */
+.btn-secondary-animated-border:hover::before {
+    opacity: 1;
+}
+
+/* Keyframe untuk animasi flowing-border sudah ada di CSS Kamu, tapi ini definisinya */
+@keyframes flowing-border {
+    0% { background-position: 0% 50%; }
+    100% { background-position: 400% 50%; }
+}
+
+/* === GAYA Tumpukan Kartu Interaktif (VERSI FINAL YANG SUDAH DIPERBAIKI) === */
+
+.card-stack-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    min-height: 450px;
+    padding: 2rem 0;
+}
+
+.card-stack {
+    position: relative; /* <-- Ini adalah properti kunci yang hilang */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 2rem auto;
+    width: 90vw;
+    max-width: 350px; /* Batas lebar maksimal di layar besar */
+    cursor: pointer;
+    z-index: 10; /* Pastikan di bawah header yang z-50 */
+}
+
+/* Aturan dasar untuk setiap kartu */
+.card-stack-item {
+    /* CSS Variables yang akan diatur oleh JavaScript */
+    --x-offset: 0px;
+    --y-offset: 0px;
+    --scale: 1;
+    --angle: 0deg;
+
+    /* Mengunci properti transform agar tidak diubah oleh aturan lain */
+    transform: translateX(var(--x-offset)) 
+               translateY(var(--y-offset)) 
+               scale(var(--scale)) 
+               rotate(var(--angle)) !important;
+
+    /* Transisi untuk semua pergerakan */
+    transition: transform 0.5s ease-in-out, opacity 0.5s ease-in-out, box-shadow 0.3s ease-out;
+    
+    /* Properti lain yang sudah ada */
+    position: absolute; /* <-- Ini butuh position: relative di induknya */
+    top: 0;
+    left: 0;
+    width: 100% !important;
+    height: auto !important;
+    background-color: white;
+    border-radius: 1rem;
+    border: 2px solid #F97316;
+    box-shadow: 0 10px 25px -5px rgba(249, 115, 22, 0.2), 0 8px 10px -6px rgba(249, 115, 22, 0.2);
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    user-select: none;
+    -webkit-user-select: none;
+}
+
+.card-stack-item .featured-card-image {
+    width: 100%;
+    height: 180px;
+    object-fit: cover;
+    object-position: top;
+    flex-shrink: 0;
+}
+
+.card-stack-item .featured-card-content {
+    display: flex;
+    flex-direction: column;
+    justify-content: center; /* Vertikal ke tengah */
+    align-items: center;     /* Horizontal ke tengah */
+    text-align: center;      /* Pusatkan teks di dalamnya */
+    flex-grow: 1;            /* Pastikan area konten mengisi sisa ruang */
+    padding: 1rem;
+}
+
+.card-stack-item .featured-card-content h3 {
+    font-size: 1.15rem;
+    font-weight: bold;
+    color: #111827;
+    margin-bottom: 0.5rem;
+}
+
+.card-stack-item .featured-card-content .label {
+    font-size: 0.75rem;
+    color: #2563EB;
+    font-weight: 600;
+    margin-bottom: 0.5rem;
+    display: block;
+}
+
+.card-stack-item .featured-card-content .featured-card-description {
+    font-size: 0.9rem;
+    color: #4B5563;
+    margin-bottom: 1rem;
+    flex-grow: 1;
+}
+
+.card-stack-item .featured-card-content .btn-primary-small {
+    margin-top: 1rem; /* Beri jarak antara deskripsi dan tombol */
+}
+
+.card-stack-item .btn-primary-small {
+    align-self: center;
+}
+
+.card-stack-item.exiting {
+    transform: translateX(150%) rotate(20deg) scale(0.8) !important;
+    opacity: 0 !important;
+}
+
+/* 1. Paksa tinggi kartu agar tidak berubah-ubah di dalam tumpukan */
+.card-stack .card-stack-item {
+    height: auto !important;
+}
+
+/* 2. Paksa wrapper deskripsi & tombol agar selalu terlihat */
+.card-stack .featured-card-description-wrapper {
+    max-height: 500px !important; /* Beri nilai tinggi yang cukup besar */
+    opacity: 1 !important;
+    overflow: visible !important;
+}
+
+/* 3. Atur ulang tata letak konten agar tombol selalu di bawah dan terlihat */
+.card-stack .featured-card-content {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between; /* Dorong judul ke atas, tombol ke bawah */
+    flex-grow: 1; /* Pastikan area konten mengisi sisa ruang */
+}
+
+/* ========================================================================
+   ANIMASI UNTUK HERO SECTION (FLOAT & BLOB)
+   ======================================================================== */
+
+/* Animasi untuk gambar melayang (float) */
+@keyframes float {
+    0% {
+        transform: translateY(0px);
+    }
+    50% {
+        transform: translateY(-20px);
+    }
+    100% {
+        transform: translateY(0px);
+    }
+}
+.animate-float {
+    animation: float 6s ease-in-out infinite;
+}
+
+/* Animasi untuk background blob bergerak */
+@keyframes blob {
+    0% {
+        transform: translate(0px, 0px) scale(1);
+    }
+    33% {
+        transform: translate(30px, -50px) scale(1.1);
+    }
+    66% {
+        transform: translate(-20px, 20px) scale(0.9);
+    }
+    100% {
+        transform: translate(0px, 0px) scale(1);
+    }
+}
+.animate-blob {
+    animation: blob 7s infinite;
+}
+
+/* Kelas utilitas untuk memberi jeda animasi */
+.animation-delay-2000 {
+    animation-delay: 2s;
+}
+.animation-delay-4000 {
+    animation-delay: 4s;
+}
+
+/* ========================================================================
+   GAYA TOMBOL CTA HERO BARU DENGAN ICON (btn-hero-cta)
+   ======================================================================== */
+.btn-hero-cta {
+    /* Gaya dasar sudah di HTML (Tailwind), tambahkan jika ada kustomisasi */
+    background: none; /* Override background Tailwind */
+    border: none;
+    text-decoration: none;
+    /* transition: all 0.3s ease; (sudah di HTML) */
+}
+
+.btn-hero-cta span:first-child { /* Background gradient utama */
+    transition: all 0.3s ease-out;
+}
+
+.btn-hero-cta:hover span:first-child {
+    transform: scale(1.1); /* Efek membesar pada background gradient */
+}
+
+.btn-hero-cta span:nth-child(2) { /* Icon wrapper */
+    /* Posisi awal ikon sedikit di luar kiri */
+    transform: translateX(0); 
+}
+
+.btn-hero-cta:hover span:nth-child(2) { /* Ikon bergerak ke dalam saat hover */
+    transform: translateX(2rem); /* Sesuaikan jarak ini jika perlu */
+}
+
+/* ========================================================================
+   ADMIN PANEL STYLES - MODERN & PROFESSIONAL
+   ======================================================================== */
+
+/* Admin Sidebar Styles */
+.admin-sidebar {
+    background: linear-gradient(180deg, #1F2937 0%, #111827 100%);
+    box-shadow: 4px 0 24px rgba(0, 0, 0, 0.12);
+}
+
+.admin-sidebar-header {
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+    padding-bottom: 1.5rem;
+    margin-bottom: 1.5rem;
+}
+
+.admin-nav-item {
+    position: relative;
+    overflow: hidden;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.admin-nav-item::before {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 0;
+    height: 100%;
+    width: 4px;
+    background: linear-gradient(to bottom, #F97316, #FBBF24);
+    transform: scaleY(0);
+    transition: transform 0.3s ease;
+}
+
+.admin-nav-item.active::before {
+    transform: scaleY(1);
+}
+
+.admin-nav-item.active {
+    background: linear-gradient(90deg, rgba(249, 115, 22, 0.15) 0%, transparent 100%);
+}
+
+.admin-nav-item:not(.active):hover {
+    background: rgba(255, 255, 255, 0.05);
+    transform: translateX(4px);
+}
+
+/* Admin Card Styles */
+.admin-card {
+    background: white;
+    border-radius: 16px;
+    border: 1px solid #f0f0f0;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04);
+    transition: all 0.3s ease;
+}
+
+.admin-card:hover {
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.08);
+    transform: translateY(-2px);
+}
+
+/* Admin Stat Card */
+.admin-stat-card {
+    position: relative;
+    background: white;
+    border-radius: 16px;
+    padding: 1.5rem;
+    border: 1px solid #f0f0f0;
+    overflow: hidden;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.admin-stat-card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 4px;
+    background: linear-gradient(90deg, var(--stat-color-from), var(--stat-color-to));
+    transform: scaleX(0);
+    transform-origin: left;
+    transition: transform 0.4s ease;
+}
+
+.admin-stat-card:hover::before {
+    transform: scaleX(1);
+}
+
+.admin-stat-card:hover {
+    box-shadow: 0 12px 32px rgba(0, 0, 0, 0.08);
+    transform: translateY(-4px);
+}
+
+.admin-stat-icon {
+    width: 56px;
+    height: 56px;
+    border-radius: 12px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.75rem;
+    position: relative;
+    overflow: hidden;
+}
+
+.admin-stat-icon::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(135deg, rgba(255, 255, 255, 0.3), transparent);
+    opacity: 0;
+    transition: opacity 0.3s ease;
+}
+
+.admin-stat-card:hover .admin-stat-icon::after {
+    opacity: 1;
+}
+
+.admin-stat-value {
+    font-size: 2.25rem;
+    font-weight: 700;
+    background: linear-gradient(135deg, #1a1a1a 0%, #4a4a4a 100%);
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+}
+
+/* Admin Action Card */
+.admin-action-card {
+    position: relative;
+    border-radius: 16px;
+    padding: 2rem;
+    color: white;
+    overflow: hidden;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.12);
+}
+
+.admin-action-card::before {
+    content: '';
+    position: absolute;
+    top: -50%;
+    right: -50%;
+    width: 200%;
+    height: 200%;
+    background: radial-gradient(circle, rgba(255, 255, 255, 0.1) 0%, transparent 70%);
+    opacity: 0;
+    transition: opacity 0.4s ease;
+}
+
+.admin-action-card:hover::before {
+    opacity: 1;
+}
+
+.admin-action-card:hover {
+    transform: translateY(-6px) scale(1.02);
+    box-shadow: 0 16px 40px rgba(0, 0, 0, 0.2);
+}
+
+/* Admin Input Styles */
+.admin-input {
+    width: 100%;
+    padding: 0.75rem 1rem;
+    border: 2px solid #e5e7eb;
+    border-radius: 10px;
+    font-size: 0.95rem;
+    transition: all 0.2s ease;
+    background: white;
+}
+
+.admin-input:focus {
+    outline: none;
+    border-color: #F97316;
+    box-shadow: 0 0 0 4px rgba(249, 115, 22, 0.1);
+}
+
+.admin-input:hover:not(:focus) {
+    border-color: #d1d5db;
+}
+
+/* Admin Select */
+.admin-select {
+    width: 100%;
+    padding: 0.75rem 1rem;
+    border: 2px solid #e5e7eb;
+    border-radius: 10px;
+    font-size: 0.95rem;
+    transition: all 0.2s ease;
+    background: white;
+    cursor: pointer;
+}
+
+.admin-select:focus {
+    outline: none;
+    border-color: #F97316;
+    box-shadow: 0 0 0 4px rgba(249, 115, 22, 0.1);
+}
+
+/* Admin Button Styles */
+.admin-btn-primary {
+    background: linear-gradient(135deg, #F97316 0%, #EA580C 100%);
+    color: white;
+    font-weight: 600;
+    padding: 0.75rem 1.5rem;
+    border-radius: 10px;
+    border: none;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 12px rgba(249, 115, 22, 0.3);
+    position: relative;
+    overflow: hidden;
+}
+
+.admin-btn-primary::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.3), transparent);
+    transition: left 0.5s ease;
+}
+
+.admin-btn-primary:hover::before {
+    left: 100%;
+}
+
+.admin-btn-primary:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 20px rgba(249, 115, 22, 0.4);
+}
+
+.admin-btn-secondary {
+    background: #f3f4f6;
+    color: #374151;
+    font-weight: 600;
+    padding: 0.75rem 1.5rem;
+    border-radius: 10px;
+    border: 2px solid #e5e7eb;
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+.admin-btn-secondary:hover {
+    background: #e5e7eb;
+    border-color: #d1d5db;
+}
+
+.admin-btn-danger {
+    background: linear-gradient(135deg, #EF4444 0%, #DC2626 100%);
+    color: white;
+    font-weight: 600;
+    padding: 0.5rem 1rem;
+    border-radius: 8px;
+    border: none;
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+.admin-btn-danger:hover {
+    transform: translateY(-1px);
+    box-shadow: 0 4px 12px rgba(239, 68, 68, 0.3);
+}
+
+/* Admin Template List Item */
+.admin-template-item {
+    background: white;
+    border-radius: 12px;
+    border: 1px solid #f0f0f0;
+    padding: 1.5rem;
+    transition: all 0.3s ease;
+}
+
+.admin-template-item:hover {
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.06);
+    border-color: #F97316;
+}
+
+/* Admin Badge */
+.admin-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.25rem;
+    padding: 0.375rem 0.75rem;
+    border-radius: 6px;
+    font-size: 0.75rem;
+    font-weight: 600;
+    line-height: 1;
+}
+
+.admin-badge-featured {
+    background: #FEF3C7;
+    color: #92400E;
+    border: 1px solid #FDE68A;
+}
+
+.admin-badge-free {
+    background: #F3F4F6;
+    color: #374151;
+    border: 1px solid #E5E7EB;
+}
+
+.admin-badge-premium {
+    background: #FFF7ED;
+    color: #EA580C;
+    border: 1px solid #FDBA74;
+}
+
+/* Admin Info Panel */
+.admin-info-panel {
+    background: #F9FAFB;
+    border: 1px solid #E5E7EB;
+    border-radius: 16px;
+    padding: 1.5rem;
+}
+
+.admin-info-panel-title {
+    color: #111827;
+    font-weight: 700;
+    font-size: 1.125rem;
+    margin-bottom: 0.75rem;
+}
+
+.admin-info-panel-list {
+    color: #4B5563;
+    font-size: 0.875rem;
+    line-height: 1.75;
+}
+
+/* Admin Loading Spinner */
+.admin-spinner {
+    border: 3px solid rgba(249, 115, 22, 0.1);
+    border-top-color: #F97316;
+    border-radius: 50%;
+    width: 48px;
+    height: 48px;
+    animation: admin-spin 0.8s linear infinite;
+}
+
+@keyframes admin-spin {
+    to { transform: rotate(360deg); }
+}
+
+/* Admin Header */
+.admin-page-header {
+    margin-bottom: 2rem;
+}
+
+.admin-page-title {
+    font-size: 2rem;
+    font-weight: 700;
+    color: #111827;
+    margin-bottom: 0.5rem;
+    background: linear-gradient(135deg, #111827 0%, #374151 100%);
+    -webkit-background-clip: text;
+    background-clip: text;
+}
+
+.admin-page-subtitle {
+    color: #6B7280;
+    font-size: 1rem;
+}
+
+/* Admin Empty State */
+.admin-empty-state {
+    background: white;
+    border-radius: 16px;
+    border: 2px dashed #e5e7eb;
+    padding: 4rem 2rem;
+    text-align: center;
+}
+
+.admin-empty-state-icon {
+    font-size: 4rem;
+    margin-bottom: 1rem;
+    opacity: 0.5;
+}
+
+.admin-empty-state-title {
+    font-size: 1.25rem;
+    font-weight: 700;
+    color: #111827;
+    margin-bottom: 0.5rem;
+}
+
+.admin-empty-state-text {
+    color: #6B7280;
+    font-size: 0.95rem;
+}
+
+/* Admin Logout Button */
+.admin-logout-btn {
+    width: 100%;
+    background: linear-gradient(135deg, #EF4444 0%, #DC2626 100%);
+    color: white;
+    font-weight: 600;
+    padding: 0.875rem;
+    border-radius: 10px;
+    border: none;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 12px rgba(239, 68, 68, 0.25);
+}
+
+.admin-logout-btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 20px rgba(239, 68, 68, 0.35);
+}
+
+/* Admin Main Content Area */
+.admin-main-content {
+    background: #F9FAFB;
+    min-height: 100vh;
+    transition: background-color 0.3s ease;
+}
+
+/* Admin Theme Toggle Button */
+.admin-theme-toggle {
+    position: fixed;
+    top: 1.5rem;
+    right: 1.5rem;
+    width: 48px;
+    height: 48px;
+    border-radius: 12px;
+    background: white;
+    border: 1px solid #E5E7EB;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04);
+    z-index: 40;
+}
+
+.admin-theme-toggle:hover {
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.12);
+    transform: scale(1.05);
+}
+
+.admin-theme-toggle svg {
+    width: 24px;
+    height: 24px;
+    color: #6B7280;
+    transition: all 0.3s ease;
+}
+
+/* Dark Mode Styles */
+[data-theme="dark"] {
+    color-scheme: dark;
+}
+
+[data-theme="dark"] .admin-main-content {
+    background: #111827;
+}
+
+[data-theme="dark"] .admin-page-title {
+    color: #F9FAFB;
+    background: linear-gradient(135deg, #F9FAFB 0%, #D1D5DB 100%);
+    -webkit-background-clip: text;
+    background-clip: text;
+}
+
+[data-theme="dark"] .admin-page-subtitle {
+    color: #9CA3AF;
+}
+
+[data-theme="dark"] .admin-card {
+    background: #1F2937;
+    border-color: #374151;
+}
+
+[data-theme="dark"] .admin-stat-card {
+    background: #1F2937;
+    border-color: #374151;
+}
+
+[data-theme="dark"] .admin-stat-card h3 {
+    color: #9CA3AF;
+}
+
+[data-theme="dark"] .admin-stat-value {
+    background: linear-gradient(135deg, #F9FAFB 0%, #D1D5DB 100%);
+    -webkit-background-clip: text;
+    background-clip: text;
+}
+
+[data-theme="dark"] .admin-input,
+[data-theme="dark"] .admin-select {
+    background: #1F2937;
+    border-color: #374151;
+    color: #F9FAFB;
+}
+
+[data-theme="dark"] .admin-input:focus,
+[data-theme="dark"] .admin-select:focus {
+    border-color: #F97316;
+    box-shadow: 0 0 0 4px rgba(249, 115, 22, 0.1);
+}
+
+[data-theme="dark"] .admin-input::placeholder {
+    color: #6B7280;
+}
+
+[data-theme="dark"] .admin-template-item {
+    background: #1F2937;
+    border-color: #374151;
+}
+
+[data-theme="dark"] .admin-template-item h3 {
+    color: #F9FAFB;
+}
+
+[data-theme="dark"] .admin-template-item p {
+    color: #9CA3AF;
+}
+
+[data-theme="dark"] .admin-empty-state {
+    background: #1F2937;
+    border-color: #374151;
+}
+
+[data-theme="dark"] .admin-empty-state-title {
+    color: #F9FAFB;
+}
+
+[data-theme="dark"] .admin-empty-state-text {
+    color: #9CA3AF;
+}
+
+[data-theme="dark"] .admin-info-panel {
+    background: #1F2937;
+    border-color: #374151;
+}
+
+[data-theme="dark"] .admin-info-panel-title {
+    color: #F9FAFB;
+}
+
+[data-theme="dark"] .admin-info-panel-list {
+    color: #9CA3AF;
+}
+
+[data-theme="dark"] .admin-theme-toggle {
+    background: #1F2937;
+    border-color: #374151;
+}
+
+[data-theme="dark"] .admin-theme-toggle svg {
+    color: #F97316;
+}
+
+[data-theme="dark"] .admin-theme-toggle span {
+    color: #F97316;
+}
+
+[data-theme="dark"] h2 {
+    color: #F9FAFB;
+}
+
+[data-theme="dark"] label {
+    color: #D1D5DB;
+}
+
+[data-theme="dark"] .admin-template-item .bg-gray-100 {
+    background: #374151;
+    color: #D1D5DB;
+}
+
+[data-theme="dark"] .admin-template-item .bg-gray-100:hover {
+    background: #4B5563;
+}
+
+[data-theme="dark"] .admin-template-item .bg-blue-100 {
+    background: #1E40AF;
+    color: #BFDBFE;
+}
+
+[data-theme="dark"] .admin-template-item .bg-blue-100:hover {
+    background: #1E3A8A;
+}
+
+/* Responsive Adjustments */
+@media (max-width: 768px) {
+    .admin-sidebar {
+        transform: translateX(-100%);
+        transition: transform 0.3s ease;
+    }
+
+    .admin-sidebar.mobile-open {
+        transform: translateX(0);
+    }
+
+    .admin-theme-toggle {
+        top: 1rem;
+        right: 1rem;
+        width: 40px;
+        height: 40px;
+    }
+
+    .admin-theme-toggle svg {
+        width: 20px;
+        height: 20px;
+    }
+}
+
+/* ==========================================================================
+   DARK MODE STYLES FOR MAIN WEBSITE
+   ========================================================================== */
+
+/* Dark mode base styles */
+[data-theme="dark"] body {
+    background-color: #111827;
+    color: #F3F4F6;
+}
+
+[data-theme="dark"] .bg-gray-50 {
+    background-color: #111827;
+}
+
+/* Dark mode gradient text - keep vibrant in dark mode */
+[data-theme="dark"] .gradient-text {
+    background: linear-gradient(to right, #FCD34D, #FB923C);
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+}
+
+/* Dark mode cards */
+[data-theme="dark"] .card {
+    background: #1F2937;
+    border: 1px solid #374151;
+    box-shadow: 0 0 25px -5px rgba(251, 146, 60, 0.15);
+}
+
+[data-theme="dark"] .card:hover {
+    box-shadow: 0 0 35px -5px rgba(251, 146, 60, 0.25);
+}
+
+/* Dark mode buttons - keep buttons vibrant */
+[data-theme="dark"] .btn-secondary {
+    background-color: #374151;
+    color: #F3F4F6;
+    border: 1px solid #4B5563;
+}
+
+[data-theme="dark"] .btn-secondary:hover {
+    background-color: #4B5563;
+    border-color: #6B7280;
+}
+
+/* Dark mode footer gradient */
+[data-theme="dark"] .footer-gradient {
+    background: linear-gradient(180deg, #111827 0%, #0F172A 100%);
+}
+
+/* Dark mode scroll to top button */
+[data-theme="dark"] .scroll-to-top-btn {
+    background-color: #F97316;
+    border: 2px solid #FB923C;
+}
+
+[data-theme="dark"] .scroll-to-top-btn:hover {
+    background-color: #EA580C;
+    box-shadow: 0 6px 30px rgba(251, 146, 60, 0.4);
+}
+
+/* Dark mode for hero CTA button */
+[data-theme="dark"] .btn-hero-cta {
+    background-color: #374151;
+    color: #F3F4F6;
+    border: 1px solid #4B5563;
+}
+
+[data-theme="dark"] .btn-hero-cta:hover {
+    background-color: #4B5563;
+    transform: translateY(-2px);
+    box-shadow: 0 8px 20px rgba(75, 85, 99, 0.3);
+}
+
+/* Smooth transitions for theme switching */
+* {
+    transition-property: background-color, border-color, color, fill, stroke;
+    transition-duration: 200ms;
+    transition-timing-function: ease-in-out;
+}
+
+/* Prevent transition on specific elements */
+.no-theme-transition,
+.no-theme-transition * {
+    transition-property: none !important;
+}
+
+/* Dark mode for product marquee and sections */
+[data-theme="dark"] section {
+    background-color: inherit;
+}
+
+[data-theme="dark"] .bg-white {
+    background-color: #1F2937;
+}
+
+/* Dark mode for form inputs */
+[data-theme="dark"] input,
+[data-theme="dark"] textarea,
+[data-theme="dark"] select {
+    background-color: #1F2937;
+    border-color: #374151;
+    color: #F3F4F6;
+}
+
+[data-theme="dark"] input:focus,
+[data-theme="dark"] textarea:focus,
+[data-theme="dark"] select:focus {
+    border-color: #F97316;
+    ring-color: rgba(249, 115, 22, 0.3);
+}
+
+[data-theme="dark"] input::placeholder,
+[data-theme="dark"] textarea::placeholder {
+    color: #9CA3AF;
+}
+
+/* Dark mode FAQ section */
+[data-theme="dark"] .faq-item {
+    background-color: #1F2937;
+    border-color: #374151;
+}
+
+[data-theme="dark"] .faq-item:hover {
+    background-color: #374151;
+}
+
+/* Dark mode for modal/dialog overlays */
+[data-theme="dark"] .modal-overlay {
+    background-color: rgba(0, 0, 0, 0.75);
+}
+
+[data-theme="dark"] .modal-content {
+    background-color: #1F2937;
+    border-color: #374151;
+}
+
+/* Dark mode for badges */
+[data-theme="dark"] .badge {
+    background-color: #374151;
+    color: #F3F4F6;
+}
+
+[data-theme="dark"] .badge-orange {
+    background-color: #9A3412;
+    color: #FED7AA;
+}
+
+/* Dark mode for dividers */
+[data-theme="dark"] hr,
+[data-theme="dark"] .divider {
+    border-color: #374151;
+}
+
+/* Dark mode for code blocks */
+[data-theme="dark"] code,
+[data-theme="dark"] pre {
+    background-color: #0F172A;
+    border-color: #1E293B;
+}
+
+/* Ensure images don't get affected by dark mode */
+[data-theme="dark"] img {
+    filter: none;
+}
+
+/* Dark mode for navigation active states */
+[data-theme="dark"] .nav-link.active {
+    color: #FB923C;
+    border-color: #FB923C;
+}
+
+/* Dark mode blob animations keep orange tint */
+[data-theme="dark"] .animate-blob {
+    opacity: 0.2;
+}

@@ -1,0 +1,104 @@
+backend:
+  name: git-gateway
+  branch: main
+
+media_folder: "photos/uploads"
+public_folder: "photos/uploads"
+
+publish_mode: editorial_workflow
+
+collections:
+  - name: "pengaturan" # Nama internal untuk koleksi
+    label: "Pengaturan Beranda" # Nama yang muncul di menu CMS
+    files:
+      - name: "Beranda" # Nama internal untuk file
+        label: "Pilih Produk Unggulan" # Nama yang muncul di menu CMS
+        file: "_data/homepage.json" # Lokasi penyimpanan file
+        # --- TAMBAHKAN DUA BARIS INI ---
+        format: "json"
+        editor:
+          preview: false
+        # ----------------------------
+        fields:
+          - name: "produk_unggulan"
+            label: "Pilih Produk Unggulan"
+            widget: "relation"
+            collection: "produk"      # Mengambil data dari koleksi 'produk'
+            multiple: true            # Memungkinkan memilih lebih dari satu
+            search_fields: ["judul"]  # Memungkinkan pencarian berdasarkan judul
+            value_field: "id"         # Menyimpan 'id' produk yang dipilih
+            display_fields: ["judul"] # Menampilkan 'judul' produk di daftar pilihan
+            hint: "Ceklis produk yang ingin dijadikan produk unggulan di halaman utama."
+
+  # --- TAMBAHKAN BAGIAN BARU INI ---
+      - name: "urutan_template"
+        label: "Urutan Halaman Templates"
+        file: "_data/template_order.json" # File baru untuk menyimpan urutan
+        fields:
+          - name: "urutan_produk"
+            label: "Urutan Semua Produk"
+            widget: "list"
+            hint: "Seret dan lepas untuk mengatur urutan produk di halaman Templates."
+            fields:
+              - name: "produk"
+                label: "Pilih Produk"
+                widget: "relation"
+                collection: "produk"
+                multiple: false
+                search_fields: ["judul"]
+                value_field: "id"
+                display_fields: ["judul"]
+      # --- AKHIR BAGIAN BARU ---
+  - name: "produk"
+    label: "Produk"
+    label_singular: "Produk"
+    description: "Kumpulan semua produk template spreadsheet."
+    folder: "content/produk"
+    create: true
+    
+    media_folder: "photos/produk/{{id}}"
+    public_folder: "photos/produk/{{id}}"
+    
+    slug: "{{id}}"
+    extension: "json"
+    format: "json"
+    summary: "{{fields.judul}} | ID: {{fields.id}}"
+    fields:
+      - {label: "ID Produk (slug, tanpa spasi, huruf kecil)", name: "id", widget: "string"}
+      - {label: "Judul", name: "judul", widget: "string"}
+      - {label: "Harga", name: "harga", widget: "number", value_type: "int", default: 0}
+      - {label: "Deskripsi Singkat", name: "deskripsi_singkat", widget: "text"}
+      - {label: "Gambar Thumbnail (untuk galeri)", name: "gambar_thumbnail", widget: "image"}
+      
+      # --- BAGIAN SEO YANG BARU DITAMBAHKAN ---
+      - name: "seo"
+        label: "Pengaturan SEO"
+        widget: "object"
+        fields:
+          - {label: "Meta Title", name: "meta_title", widget: "string", required: false, hint: "Judul yang muncul di Google & tab browser. Jika kosong, akan memakai Judul utama."}
+          - {label: "Meta Description", name: "meta_description", widget: "text", required: false, hint: "Deskripsi singkat (maks 160 karakter) untuk hasil pencarian Google."}
+          - {label: "Gambar Open Graph", name: "og_image", widget: "image", required: false, hint: "Gambar untuk preview saat dibagikan ke media sosial (rekomendasi: 1200x630px). Jika kosong, akan memakai Gambar Utama."}
+      
+      # --- LANJUTAN KONFIGURASI Kamu ---
+      - name: "detail"
+        label: "Detail Lengkap Produk"
+        widget: "object"
+        fields:
+          - {label: "Gambar Utama", name: "gambar_utama", widget: "image"}
+          - {label: "Deskripsi Lengkap", name: "deskripsi_lengkap", widget: "markdown"}
+          - {label: "File PDF Panduan", name: "file_panduan_pdf", widget: "file", required: false, hint: "Unggah file PDF panduan penggunaan untuk produk ini."}
+          - {label: "Link YouTube", name: "link_youtube", widget: "string", required: false}
+          - {label: "Link Pembelian Langsung", name: "payment_gateway", widget: "string", required: false, hint: "https://rsquareidea.myr.id/..."}
+          - name: "link_pembelian"
+            label: "Link Pembelian"
+            widget: "list"
+            fields:
+              - {label: "Platform", name: "platform", widget: "string"}
+              - {label: "URL", name: "url", widget: "string"}
+          - name: "galeri"
+            label: "Galeri Fitur"
+            widget: "list"
+            fields:
+              - {label: "Gambar Fitur", name: "gambar", widget: "image"}
+              - {label: "Judul Fitur", name: "judul", widget: "string"}
+              - {label: "Deskripsi Fitur", name: "deskripsi", widget: "markdown"}

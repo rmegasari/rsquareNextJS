@@ -1,0 +1,170 @@
+
+> rsquare@1.0.0 dev
+> next dev
+
+ ⚠ Port 3000 is in use, trying 3001 instead.
+ ⚠ Port 3001 is in use, trying 3002 instead.
+  ▲ Next.js 14.2.33
+  - Local:        http://localhost:3002
+
+ ✓ Starting...
+ ✓ Ready in 1935ms
+ ○ Compiling / ...
+ ✓ Compiled / in 4.8s (574 modules)
+ GET / 200 in 5581ms
+ ○ Compiling /api/products ...
+ ✓ Compiled /api/products in 2.1s (332 modules)
+ GET /api/products 200 in 2363ms
+ GET / 200 in 219ms
+ ○ Compiling /_not-found ...
+ ✓ Compiled /_not-found in 1675ms (575 modules)
+ GET /.well-known/appspecific/com.chrome.devtools.json 404 in 2206ms
+ ○ Compiling /templates ...
+ ✓ Compiled /templates in 667ms (578 modules)
+ ○ Compiling /[slug] ...
+ ✓ Compiled /[slug] in 731ms (591 modules)
+ ○ Compiling /middleware ...
+ ✓ Compiled /middleware in 727ms (72 modules)
+ ○ Compiling /login ...
+ ✓ Compiled /login in 724ms (597 modules)
+ GET /login?redirect=%2Fadmin 200 in 932ms
+ ○ Compiling /admin ...
+ ✓ Compiled /admin in 1559ms (608 modules)
+ ○ Compiling /api/products ...
+ ✓ Compiled /api/products in 941ms (357 modules)
+ GET /api/products 200 in 1092ms
+ GET /api/products 200 in 46ms
+ ○ Compiling /admin/templates ...
+ ✓ Compiled /admin/templates in 674ms (644 modules)
+ GET /api/products 200 in 46ms
+ GET /api/products 200 in 10ms
+ GET /api/products 200 in 24ms
+ GET /api/products 200 in 28ms
+ ○ Compiling /admin/templates/new ...
+ ✓ Compiled /admin/templates/new in 1240ms (637 modules)
+ GET /api/products 200 in 13ms
+ GET /api/products 200 in 29ms
+ ✓ Compiled in 3.3s (648 modules)
+ ✓ Compiled / in 456ms (362 modules)
+ GET /api/products 200 in 220ms
+ GET /api/products 200 in 57ms
+ GET /api/products 200 in 23ms
+ GET /api/products 200 in 43ms
+ ✓ Compiled in 5.8s (652 modules)
+ ○ Compiling /_not-found ...
+ ✓ Compiled /_not-found in 761ms (353 modules)
+ GET /admin/templates 200 in 475ms
+ GET /api/products 200 in 56ms
+ GET /api/products 200 in 40ms
+ ○ Compiling /admin/templates/edit/[id] ...
+ ✓ Compiled /admin/templates/edit/[id] in 649ms (645 modules)
+ ⚠ Fast Refresh had to perform a full reload. Read more: https://nextjs.org/docs/messages/fast-refresh-reload
+ GET /_next/static/webpack/029c964b55ffb398.webpack.hot-update.json 404 in 137ms
+ GET /admin/templates 200 in 48ms
+ GET /api/products 200 in 22ms
+ GET /api/products 200 in 23ms
+ ✓ Compiled in 2.8s (659 modules)
+ ✓ Compiled in 901ms (302 modules)
+ ○ Compiling /_error ...
+ ✓ Compiled /_error in 7.2s (851 modules)
+ GET /.well-known/appspecific/com.chrome.devtools.json 404 in 7915ms
+ ✓ Compiled /admin/templates/edit/[id] in 380ms (367 modules)
+ ○ Compiling /api/products/[id] ...
+ ✓ Compiled /api/products/[id] in 1524ms (397 modules)
+ GET /api/products/content-calendar 200 in 2642ms
+ GET /api/products/content-calendar 200 in 104ms
+ ✓ Compiled /api/products in 260ms (395 modules)
+ GET /api/products 200 in 333ms
+ GET /api/products 200 in 12ms
+ GET /admin/templates 200 in 262ms
+ GET /.well-known/appspecific/com.chrome.devtools.json 404 in 154ms
+ GET /api/products 200 in 40ms
+ GET /api/products 200 in 55ms
+ ✓ Compiled in 1338ms (834 modules)
+ ✓ Compiled in 792ms (487 modules)
+ ✓ Compiled /_not-found in 277ms (362 modules)
+ GET /admin/templates 200 in 115ms
+ GET /.well-known/appspecific/com.chrome.devtools.json 404 in 42ms
+ ✓ Compiled /api/products in 225ms (392 modules)
+ GET /api/products 200 in 304ms
+ GET /api/products 200 in 12ms
+ GET /api/products 200 in 21ms
+ GET /api/products 200 in 19ms
+ ✓ Compiled in 1922ms (881 modules)
+ GET /api/products 200 in 1487ms
+ GET /api/products 200 in 71ms
+ ✓ Compiled in 996ms (487 modules)
+ ✓ Compiled in 2s (881 modules)
+ ✓ Compiled in 2.3s (880 modules)
+ ✓ Compiled in 1967ms (848 modules)
+ ✓ Compiled in 1086ms (848 modules)
+ ✓ Compiled in 2.5s (848 modules)
+ ✓ Compiled in 4.4s (850 modules)
+ ○ Compiling /_not-found ...
+ ✓ Compiled /_not-found in 996ms (364 modules)
+ ⨯ TypeError: Cannot read properties of undefined (reading 'clientModules')
+    at /home/tuneeca/web_app/RSQUARE-main/node_modules/next/dist/compiled/next-server/app-page.runtime.dev.js:39:25703
+    at /home/tuneeca/web_app/RSQUARE-main/node_modules/next/dist/server/lib/trace/tracer.js:191:62
+    at /home/tuneeca/web_app/RSQUARE-main/node_modules/next/dist/server/lib/trace/tracer.js:140:36
+    at NoopContextManager.with (/home/tuneeca/web_app/RSQUARE-main/node_modules/next/dist/compiled/@opentelemetry/api/index.js:1:7062)
+    at ContextAPI.with (/home/tuneeca/web_app/RSQUARE-main/node_modules/next/dist/compiled/@opentelemetry/api/index.js:1:518)
+    at NoopTracer.startActiveSpan (/home/tuneeca/web_app/RSQUARE-main/node_modules/next/dist/compiled/@opentelemetry/api/index.js:1:18093)
+    at ProxyTracer.startActiveSpan (/home/tuneeca/web_app/RSQUARE-main/node_modules/next/dist/compiled/@opentelemetry/api/index.js:1:18854)
+    at /home/tuneeca/web_app/RSQUARE-main/node_modules/next/dist/server/lib/trace/tracer.js:122:103
+    at NoopContextManager.with (/home/tuneeca/web_app/RSQUARE-main/node_modules/next/dist/compiled/@opentelemetry/api/index.js:1:7062)
+    at ContextAPI.with (/home/tuneeca/web_app/RSQUARE-main/node_modules/next/dist/compiled/@opentelemetry/api/index.js:1:518)
+    at NextTracerImpl.trace (/home/tuneeca/web_app/RSQUARE-main/node_modules/next/dist/server/lib/trace/tracer.js:122:28)
+    at /home/tuneeca/web_app/RSQUARE-main/node_modules/next/dist/server/lib/trace/tracer.js:191:31
+    at r3 (/home/tuneeca/web_app/RSQUARE-main/node_modules/next/dist/compiled/next-server/app-page.runtime.dev.js:41:1678)
+    at async doRender (/home/tuneeca/web_app/RSQUARE-main/node_modules/next/dist/server/base-server.js:1427:30)
+    at async cacheEntry.responseCache.get.routeKind (/home/tuneeca/web_app/RSQUARE-main/node_modules/next/dist/server/base-server.js:1588:28)
+ ○ Compiling /_error ...
+ ✓ Compiled /_error in 715ms (839 modules)
+ GET /admin/templates 500 in 4723ms
+ ○ Compiling /[slug] ...
+ ✓ Compiled /[slug] in 1154ms (376 modules)
+ GET /admin 404 in 1615ms
+ ⨯ Failed to generate static paths for /[slug]:
+Error: Cannot find module './vendor-chunks/@swc.js'
+Require stack:
+- /home/tuneeca/web_app/RSQUARE-main/.next/server/webpack-runtime.js
+- /home/tuneeca/web_app/RSQUARE-main/.next/server/app/(site)/[slug]/page.js
+- /home/tuneeca/web_app/RSQUARE-main/node_modules/next/dist/server/require.js
+- /home/tuneeca/web_app/RSQUARE-main/node_modules/next/dist/server/load-components.js
+- /home/tuneeca/web_app/RSQUARE-main/node_modules/next/dist/build/utils.js
+- /home/tuneeca/web_app/RSQUARE-main/node_modules/next/dist/server/dev/static-paths-worker.js
+- /home/tuneeca/web_app/RSQUARE-main/node_modules/next/dist/compiled/jest-worker/processChild.js
+    at Function.<anonymous> (node:internal/modules/cjs/loader:1383:15)
+    at /home/tuneeca/web_app/RSQUARE-main/node_modules/next/dist/server/require-hook.js:55:36
+    at defaultResolveImpl (node:internal/modules/cjs/loader:1025:19)
+    at resolveForCJSWithHooks (node:internal/modules/cjs/loader:1030:22)
+    at Function._load (node:internal/modules/cjs/loader:1192:37)
+    at TracingChannel.traceSync (node:diagnostics_channel:322:14)
+    at wrapModuleLoad (node:internal/modules/cjs/loader:237:24)
+    at Module.<anonymous> (node:internal/modules/cjs/loader:1463:12)
+    at mod.require (/home/tuneeca/web_app/RSQUARE-main/node_modules/next/dist/server/require-hook.js:65:28)
+    at require (node:internal/modules/helpers:147:16) {
+  type: 'Error',
+  code: 'MODULE_NOT_FOUND',
+  requireStack: [
+    '/home/tuneeca/web_app/RSQUARE-main/.next/server/webpack-runtime.js',
+    '/home/tuneeca/web_app/RSQUARE-main/.next/server/app/(site)/[slug]/page.js',
+    '/home/tuneeca/web_app/RSQUARE-main/node_modules/next/dist/server/require.js',
+    '/home/tuneeca/web_app/RSQUARE-main/node_modules/next/dist/server/load-components.js',
+    '/home/tuneeca/web_app/RSQUARE-main/node_modules/next/dist/build/utils.js',
+    '/home/tuneeca/web_app/RSQUARE-main/node_modules/next/dist/server/dev/static-paths-worker.js',
+    '/home/tuneeca/web_app/RSQUARE-main/node_modules/next/dist/compiled/jest-worker/processChild.js'
+  ]
+}
+ GET /_next/static/chunks/main-app.js 404 in 93ms
+ GET /_next/static/chunks/app-pages-internals.js 404 in 90ms
+ GET /.well-known/appspecific/com.chrome.devtools.json 404 in 55ms
+ GET / 404 in 184ms
+ GET /_next/static/css/app/layout.css?v=1761879187556 404 in 83ms
+ GET /.well-known/appspecific/com.chrome.devtools.json 404 in 137ms
+ GET /_next/static/chunks/app-pages-internals.js 404 in 157ms
+ GET /_next/static/chunks/main-app.js?v=1761879187556 404 in 166ms
+ GET /_next/static/chunks/app/layout.js 404 in 137ms
+ ⨯ Module not found: Error: Can't resolve 'next-flight-client-entry-loader' in '/home/tuneeca/web_app/RSQUARE-main'
+ ✓ Compiled in 51ms
+ ⨯ Module not found: Error: Can't resolve 'next/dist/pages/_app' in '/home/tuneeca/web_app/RSQUARE-main'

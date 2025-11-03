@@ -1,0 +1,42 @@
+import { getAllProducts } from "@/lib/products";
+import { saveProductToDB } from "@/lib/db";
+import { NextResponse } from "next/server";
+
+export async function GET() {
+  try {
+    const products = await getAllProducts();
+    return NextResponse.json(products);
+  } catch (error) {
+    console.error("Error fetching products:", error);
+    return NextResponse.json({ error: "Failed to fetch products" }, { status: 500 });
+  }
+}
+
+export async function POST(request) {
+  try {
+    const productData = await request.json();
+
+    // Validasi data
+    if (!productData.id || !productData.judul) {
+      return NextResponse.json(
+        { error: "ID dan Judul wajib diisi" },
+        { status: 400 }
+      );
+    }
+
+    // Simpan ke database
+    saveProductToDB(productData);
+
+    return NextResponse.json({
+      success: true,
+      message: "Template berhasil disimpan",
+      productId: productData.id,
+    });
+  } catch (error) {
+    console.error("Error saving product:", error);
+    return NextResponse.json(
+      { error: "Gagal menyimpan template", details: error.message },
+      { status: 500 }
+    );
+  }
+}

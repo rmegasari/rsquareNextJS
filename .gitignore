@@ -1,0 +1,8 @@
+# Abaikan file manifest produk karena akan dibuat saat proses build
+content/produk/_index.json
+
+# Database files
+data/*.db
+data/*.db-shm
+data/*.db-wal
+node_modules

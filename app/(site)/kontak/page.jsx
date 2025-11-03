@@ -1,0 +1,78 @@
+export const metadata = {
+  title: "Kontak Kami",
+  description:
+    "Hubungi tim RSQUARE untuk pertanyaan, masukan, atau diskusi mengenai template. Kami siap membantu Kamu menemukan solusi spreadsheet terbaik.",
+};
+
+export default function KontakPage() {
+  return (
+    <div className="py-20 px-6">
+      <div className="container mx-auto max-w-2xl">
+        <header className="text-center mb-12" data-animate-on-scroll>
+          <h1 className="text-4xl md:text-5xl font-extrabold mb-4 gradient-text pb-2">Hubungi Kami</h1>
+          <p className="text-lg text-gray-600">
+            Punya pertanyaan, masukan, atau butuh bantuan? Kami siap mendengarkan.
+          </p>
+        </header>
+        <div className="card p-8 md:p-10 rounded-2xl" data-animate-on-scroll>
+          <form
+            name="kontak"
+            method="POST"
+            data-netlify="true"
+            data-netlify-honeypot="bot-field"
+            className="space-y-6"
+          >
+            <input type="hidden" name="form-name" value="kontak" />
+            <p className="hidden">
+              <label>
+                Jangan diisi: <input name="bot-field" />
+              </label>
+            </p>
+            <div>
+              <label htmlFor="name" className="block text-sm font-medium text-gray-700 mb-2">
+                Nama Kamu
+              </label>
+              <input
+                type="text"
+                id="name"
+                name="name"
+                required
+                className="w-full px-4 py-3 bg-gray-50 border border-gray-300 rounded-lg text-gray-900 focus:outline-none focus:ring-2 focus:ring-orange-500"
+              />
+            </div>
+            <div>
+              <label htmlFor="email" className="block text-sm font-medium text-gray-700 mb-2">
+                Alamat Email
+              </label>
+              <input
+                type="email"
+                id="email"
+                name="email"
+                required
+                className="w-full px-4 py-3 bg-gray-50 border border-gray-300 rounded-lg text-gray-900 focus:outline-none focus:ring-2 focus:ring-orange-500"
+              />
+            </div>
+            <div>
+              <label htmlFor="message" className="block text-sm font-medium text-gray-700 mb-2">
+                Ceritakan kebutuhan Kamu
+              </label>
+              <textarea
+                id="message"
+                name="message"
+                rows={5}
+                required
+                className="w-full px-4 py-3 bg-gray-50 border border-gray-300 rounded-lg text-gray-900 focus:outline-none focus:ring-2 focus:ring-orange-500"
+              />
+            </div>
+            <button type="submit" className="btn-primary btn-shiny w-full px-6 py-3 rounded-lg font-semibold text-white">
+              Kirim Pesan
+            </button>
+            <p className="text-sm text-gray-500 text-center">
+              Kami akan merespons dalam 1×24 jam kerja melalui email.
+            </p>
+          </form>
+        </div>
+      </div>
+    </div>
+  );
+}
