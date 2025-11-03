@@ -1,8 +1,38 @@
-# Abaikan file manifest produk karena akan dibuat saat proses build
-content/produk/_index.json
+# Dependencies
+node_modules
+/.pnp
+.pnp.js
 
-# Database files
-data/*.db
+# Testing
+/coverage
+
+# Next.js
+/.next/
+/out/
+
+# Production
+/build
+
+# Misc
+.DS_Store
+*.pem
+
+# Debug
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# Local env files
+.env*.local
+.env
+
+# Vercel
+.vercel
+
+# Typescript
+*.tsbuildinfo
+next-env.d.ts
+
+# Database files (keep products.db for deployment)
 data/*.db-shm
 data/*.db-wal
-node_modules
