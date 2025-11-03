@@ -7,13 +7,13 @@ export default function KontakPage() {
   const { language } = useSite();
 
   return (
-    <div className="py-20 px-6">
+    <div className="py-20 px-6 dark:bg-gray-900">
       <div className="container mx-auto max-w-2xl">
         <header className="text-center mb-12" data-animate-on-scroll>
           <h1 className="text-4xl md:text-5xl font-extrabold mb-4 gradient-text pb-2">
             {t("contactTitle", language)}
           </h1>
-          <p className="text-lg text-gray-600">
+          <p className="text-lg text-gray-600 dark:text-gray-300">
             {t("contactDescription", language)}
           </p>
         </header>
@@ -32,7 +32,7 @@ export default function KontakPage() {
               </label>
             </p>
             <div>
-              <label htmlFor="name" className="block text-sm font-medium text-gray-700 mb-2">
+              <label htmlFor="name" className="block text-sm font-medium text-gray-700 dark:text-gray-200 mb-2">
                 {t("contactFormName", language)}
               </label>
               <input
@@ -40,11 +40,11 @@ export default function KontakPage() {
                 id="name"
                 name="name"
                 required
-                className="w-full px-4 py-3 bg-gray-50 border border-gray-300 rounded-lg text-gray-900 focus:outline-none focus:ring-2 focus:ring-orange-500"
+                className="w-full px-4 py-3 bg-gray-50 dark:bg-gray-800 border border-gray-300 dark:border-gray-600 rounded-lg text-gray-900 dark:text-gray-100 focus:outline-none focus:ring-2 focus:ring-orange-500"
               />
             </div>
             <div>
-              <label htmlFor="email" className="block text-sm font-medium text-gray-700 mb-2">
+              <label htmlFor="email" className="block text-sm font-medium text-gray-700 dark:text-gray-200 mb-2">
                 {t("contactFormEmail", language)}
               </label>
               <input
@@ -52,11 +52,11 @@ export default function KontakPage() {
                 id="email"
                 name="email"
                 required
-                className="w-full px-4 py-3 bg-gray-50 border border-gray-300 rounded-lg text-gray-900 focus:outline-none focus:ring-2 focus:ring-orange-500"
+                className="w-full px-4 py-3 bg-gray-50 dark:bg-gray-800 border border-gray-300 dark:border-gray-600 rounded-lg text-gray-900 dark:text-gray-100 focus:outline-none focus:ring-2 focus:ring-orange-500"
               />
             </div>
             <div>
-              <label htmlFor="message" className="block text-sm font-medium text-gray-700 mb-2">
+              <label htmlFor="message" className="block text-sm font-medium text-gray-700 dark:text-gray-200 mb-2">
                 {t("contactFormMessage", language)}
               </label>
               <textarea
@@ -64,13 +64,13 @@ export default function KontakPage() {
                 name="message"
                 rows={5}
                 required
-                className="w-full px-4 py-3 bg-gray-50 border border-gray-300 rounded-lg text-gray-900 focus:outline-none focus:ring-2 focus:ring-orange-500"
+                className="w-full px-4 py-3 bg-gray-50 dark:bg-gray-800 border border-gray-300 dark:border-gray-600 rounded-lg text-gray-900 dark:text-gray-100 focus:outline-none focus:ring-2 focus:ring-orange-500"
               />
             </div>
             <button type="submit" className="btn-primary btn-shiny w-full px-6 py-3 rounded-lg font-semibold text-white">
               {t("contactFormSubmit", language)}
             </button>
-            <p className="text-sm text-gray-500 text-center">
+            <p className="text-sm text-gray-500 dark:text-gray-400 text-center">
               {t("contactFormSuccess", language)}
             </p>
           </form>

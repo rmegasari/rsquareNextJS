@@ -117,7 +117,7 @@ export default async function ProductDetailPage({ params }) {
     : "";
 
   return (
-    <div className="py-20 px-6">
+    <div className="py-20 px-6 dark:bg-gray-900">
       <div className="container mx-auto max-w-6xl">
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
           <div className="flex flex-col items-center gap-6">
@@ -128,11 +128,11 @@ export default async function ProductDetailPage({ params }) {
                   alt={`Tampilan Utama ${product.judul}`}
                   width={960}
                   height={720}
-                  className="relative w-full rounded-xl overflow-hidden bg-white ring-1 ring-orange-100"
+                  className="relative w-full rounded-xl overflow-hidden bg-white dark:bg-gray-800 ring-1 ring-orange-100 dark:ring-orange-900/50"
                 />
               ) : (
                 <div className="card rounded-xl p-12 text-center">
-                  <p className="text-gray-500">Gambar utama belum tersedia.</p>
+                  <p className="text-gray-500 dark:text-gray-400">Gambar utama belum tersedia.</p>
                 </div>
               )}
             </div>
@@ -140,14 +140,14 @@ export default async function ProductDetailPage({ params }) {
 
           <div>
             <h1 className="text-4xl font-bold mb-4 gradient-text pb-2">{product.judul}</h1>
-            <p className="text-3xl font-bold text-gray-900 mb-6">{formatPrice(product.harga)}</p>
+            <p className="text-3xl font-bold text-gray-900 dark:text-gray-100 mb-6">{formatPrice(product.harga)}</p>
             {descriptionHTML ? (
               <div
-                className="space-y-4 text-gray-700 leading-relaxed mb-8"
+                className="space-y-4 text-gray-700 dark:text-gray-300 leading-relaxed mb-8"
                 dangerouslySetInnerHTML={{ __html: descriptionHTML }}
               />
             ) : (
-              <p className="text-gray-600 mb-8">{product.deskripsi_singkat}</p>
+              <p className="text-gray-600 dark:text-gray-300 mb-8">{product.deskripsi_singkat}</p>
             )}
             <PurchaseButtons product={product} />
           </div>
@@ -155,7 +155,7 @@ export default async function ProductDetailPage({ params }) {
 
         {product.detail?.galeri?.length ? (
           <section className="mt-20 space-y-12">
-            <h2 className="text-3xl font-bold text-gray-900 text-center">Apa Saja yang Kamu Dapatkan?</h2>
+            <h2 className="text-3xl font-bold text-gray-900 dark:text-gray-100 text-center">Apa Saja yang Kamu Dapatkan?</h2>
             <div className="grid gap-10">
               {product.detail.galeri.map((item) => {
                 const galleryHTML = item.deskripsi ? marked.parse(item.deskripsi) : "";
@@ -166,17 +166,17 @@ export default async function ProductDetailPage({ params }) {
                       alt={item.judul}
                       width={960}
                       height={720}
-                      className="relative w-full h-full min-h-[240px] bg-white"
+                      className="relative w-full h-full min-h-[240px] bg-white dark:bg-gray-800"
                     />
                     <div className="space-y-4 p-6 md:p-10">
-                      <h3 className="text-2xl font-bold text-gray-900">{item.judul}</h3>
+                      <h3 className="text-2xl font-bold text-gray-900 dark:text-gray-100">{item.judul}</h3>
                       {galleryHTML ? (
                         <div
-                          className="space-y-3 text-gray-600 leading-relaxed"
+                          className="space-y-3 text-gray-600 dark:text-gray-300 leading-relaxed"
                           dangerouslySetInnerHTML={{ __html: galleryHTML }}
                         />
                       ) : (
-                        <p className="text-gray-600">{item.deskripsi}</p>
+                        <p className="text-gray-600 dark:text-gray-300">{item.deskripsi}</p>
                       )}
                     </div>
                   </div>
