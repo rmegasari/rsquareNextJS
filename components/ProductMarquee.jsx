@@ -25,10 +25,10 @@ export default async function ProductMarquee() {
   const duplicated = [...images, ...images];
 
   return (
-    <section className="py-20">
+    <section className="py-20 dark:bg-gray-900">
       <div className="text-center mb-12" data-animate-on-scroll>
-        <h2 className="text-3xl font-bold text-gray-800">Desain yang Hidup &amp; Fungsional</h2>
-        <p className="text-xl text-gray-600 mt-4">
+        <h2 className="text-3xl font-bold text-gray-800 dark:text-gray-100">Desain yang Hidup &amp; Fungsional</h2>
+        <p className="text-xl text-gray-600 dark:text-gray-300 mt-4">
           Lihat beberapa contoh template kami dalam aksi.
         </p>
       </div>

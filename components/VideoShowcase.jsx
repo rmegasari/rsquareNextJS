@@ -67,11 +67,11 @@ export default function VideoShowcase() {
   }, [currentIndex]);
 
   return (
-    <section id="youtube" className="py-20 px-6 bg-gray-50">
+    <section id="youtube" className="py-20 px-6 bg-gray-50 dark:bg-gray-800">
       <div className="container mx-auto">
         <div className="max-w-3xl mx-auto text-center mb-12" data-animate-on-scroll>
-          <h2 className="text-3xl font-bold text-gray-900">{t("videoTitle", language)}</h2>
-          <p className="text-gray-600 mt-4">
+          <h2 className="text-3xl font-bold text-gray-900 dark:text-gray-100">{t("videoTitle", language)}</h2>
+          <p className="text-gray-600 dark:text-gray-300 mt-4">
             {t("videoSubtitle", language)}
           </p>
         </div>
@@ -90,8 +90,8 @@ export default function VideoShowcase() {
                 allowFullScreen
               />
             </div>
-            <div className="p-6 bg-white">
-              <h3 className="font-semibold text-gray-800 text-lg text-center">
+            <div className="p-6 bg-white dark:bg-gray-800">
+              <h3 className="font-semibold text-gray-800 dark:text-gray-100 text-lg text-center">
                 {VIDEOS[currentIndex].title}
               </h3>
             </div>
@@ -100,14 +100,14 @@ export default function VideoShowcase() {
           {/* Navigation Buttons */}
           <button
             onClick={handlePrevious}
-            className="absolute left-0 top-1/2 -translate-y-1/2 -translate-x-4 md:-translate-x-12 bg-white hover:bg-orange-500 text-gray-800 hover:text-white w-12 h-12 rounded-full shadow-lg transition-all duration-300 flex items-center justify-center font-bold text-xl z-10"
+            className="absolute left-0 top-1/2 -translate-y-1/2 -translate-x-4 md:-translate-x-12 bg-white dark:bg-gray-700 hover:bg-orange-500 text-gray-800 dark:text-gray-100 hover:text-white w-12 h-12 rounded-full shadow-lg transition-all duration-300 flex items-center justify-center font-bold text-xl z-10"
             aria-label="Previous video"
           >
             ‹
           </button>
           <button
             onClick={handleNext}
-            className="absolute right-0 top-1/2 -translate-y-1/2 translate-x-4 md:translate-x-12 bg-white hover:bg-orange-500 text-gray-800 hover:text-white w-12 h-12 rounded-full shadow-lg transition-all duration-300 flex items-center justify-center font-bold text-xl z-10"
+            className="absolute right-0 top-1/2 -translate-y-1/2 translate-x-4 md:translate-x-12 bg-white dark:bg-gray-700 hover:bg-orange-500 text-gray-800 dark:text-gray-100 hover:text-white w-12 h-12 rounded-full shadow-lg transition-all duration-300 flex items-center justify-center font-bold text-xl z-10"
             aria-label="Next video"
           >
             ›
@@ -125,7 +125,7 @@ export default function VideoShowcase() {
                 className={`w-3 h-3 rounded-full transition-all duration-300 ${
                   index === currentIndex
                     ? "bg-orange-500 w-8"
-                    : "bg-gray-300 hover:bg-gray-400"
+                    : "bg-gray-300 dark:bg-gray-600 hover:bg-gray-400 dark:hover:bg-gray-500"
                 }`}
                 aria-label={`Go to video ${index + 1}`}
               />

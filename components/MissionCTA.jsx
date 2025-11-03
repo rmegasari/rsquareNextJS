@@ -9,12 +9,12 @@ export default function MissionCTA() {
   const { language } = useSite();
 
   return (
-    <section id="mission-cta" className="py-20 px-6 bg-gray-50">
+    <section id="mission-cta" className="py-20 px-6 bg-gray-50 dark:bg-gray-800">
       <div className="container mx-auto max-w-6xl" data-animate-on-scroll>
         <div className="grid gap-6 md:grid-cols-2">
           {/* Card 1: Misi RSQUARE */}
           <div className="card rounded-xl overflow-hidden flex flex-col">
-            <div className="relative w-full aspect-video bg-gradient-to-br from-orange-50 to-orange-100 flex items-center justify-center">
+            <div className="relative w-full aspect-video bg-gradient-to-br from-orange-50 to-orange-100 dark:from-orange-900/20 dark:to-orange-800/20 flex items-center justify-center">
               <Image
                 src="/photos/RSQUARE-LOGO2.png"
                 alt="Logo RSQUARE"
@@ -24,10 +24,10 @@ export default function MissionCTA() {
               />
             </div>
             <div className="p-6 flex flex-col flex-1">
-              <h2 className="text-xl font-bold text-gray-800 mb-2">
+              <h2 className="text-xl font-bold text-gray-800 dark:text-gray-100 mb-2">
                 {t("missionTitle", language)} <span className="gradient-text">{t("missionHighlight", language)}</span>
               </h2>
-              <p className="text-gray-600 flex-1">
+              <p className="text-gray-600 dark:text-gray-300 flex-1">
                 {t("missionDescription", language)}
               </p>
               <div className="mt-6">
@@ -40,7 +40,7 @@ export default function MissionCTA() {
 
           {/* Card 2: Request Template Khusus */}
           <div className="card rounded-xl overflow-hidden flex flex-col">
-            <div className="relative w-full aspect-video bg-gray-800">
+            <div className="relative w-full aspect-video bg-gray-800 dark:bg-gray-700">
               <Image
                 src="/Spreadsheets-bro.png"
                 alt="Ilustrasi Kustomisasi Template"
@@ -56,8 +56,8 @@ export default function MissionCTA() {
               </div>
             </div>
             <div className="p-6 flex flex-col flex-1">
-              <h2 className="text-xl font-bold text-gray-800 mb-2">{t("customTitle", language)}</h2>
-              <p className="text-gray-600 flex-1">
+              <h2 className="text-xl font-bold text-gray-800 dark:text-gray-100 mb-2">{t("customTitle", language)}</h2>
+              <p className="text-gray-600 dark:text-gray-300 flex-1">
                 {t("customDescription", language)}
               </p>
               <div className="mt-6">

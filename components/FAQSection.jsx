@@ -40,11 +40,11 @@ export default function FAQSection() {
   ];
 
   return (
-    <section id="faq" className="py-20 px-6">
+    <section id="faq" className="py-20 px-6 dark:bg-gray-900">
       <div className="container mx-auto max-w-5xl">
         <div className="text-center mb-12" data-animate-on-scroll>
-          <h2 className="text-3xl font-bold text-gray-900">{t("faqTitle", language)}</h2>
-          <p className="text-gray-600 mt-4">
+          <h2 className="text-3xl font-bold text-gray-900 dark:text-gray-100">{t("faqTitle", language)}</h2>
+          <p className="text-gray-600 dark:text-gray-300 mt-4">
             {t("faqSubtitle", language)}
           </p>
         </div>
@@ -59,7 +59,7 @@ export default function FAQSection() {
                   className="faq-question w-full flex justify-between items-center text-left p-6"
                   aria-expanded={isOpen}
                 >
-                  <span className="font-bold text-lg text-gray-800">{item.question}</span>
+                  <span className="font-bold text-lg text-gray-800 dark:text-gray-100">{item.question}</span>
                   <svg
                     className={`faq-icon w-6 h-6 text-orange-500 transform transition-transform duration-300 ${
                       isOpen ? "rotate-180" : ""
@@ -76,7 +76,7 @@ export default function FAQSection() {
                     isOpen ? "max-h-96" : "max-h-0"
                   }`}
                 >
-                  <p className="p-6 pt-0 text-gray-600">{item.answer}</p>
+                  <p className="p-6 pt-0 text-gray-600 dark:text-gray-300">{item.answer}</p>
                 </div>
               </div>
             );
