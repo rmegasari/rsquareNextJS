@@ -19,10 +19,19 @@ export default function AdminTemplatesPage() {
         const response = await fetch("/api/products?includeInactive=true");
         const products = await response.json();
 
-        setTemplates(products);
-        setFilteredTemplates(products);
+        // Ensure products is an array
+        if (Array.isArray(products)) {
+          setTemplates(products);
+          setFilteredTemplates(products);
+        } else {
+          console.error("Products is not an array:", products);
+          setTemplates([]);
+          setFilteredTemplates([]);
+        }
       } catch (error) {
         console.error("Error loading templates:", error);
+        setTemplates([]);
+        setFilteredTemplates([]);
       } finally {
         setIsLoading(false);
       }
