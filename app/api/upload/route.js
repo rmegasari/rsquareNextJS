@@ -1,6 +1,13 @@
 import { NextResponse } from "next/server";
-import { writeFile, mkdir } from "fs/promises";
-import path from "path";
+import { createClient } from "@supabase/supabase-js";
+
+// Initialize Supabase client
+const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL;
+const supabaseAnonKey = process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY;
+
+const supabase = supabaseUrl && supabaseAnonKey
+  ? createClient(supabaseUrl, supabaseAnonKey)
+  : null;
 
 export async function POST(request) {
   try {
@@ -32,39 +39,103 @@ export async function POST(request) {
       );
     }
 
-    const bytes = await file.arrayBuffer();
-    const buffer = Buffer.from(bytes);
-
     // Generate unique filename
     const timestamp = Date.now();
     const randomString = Math.random().toString(36).substring(2, 8);
     const extension = file.name.split(".").pop();
     const filename = `${timestamp}-${randomString}.${extension}`;
 
-    // Create upload directory if it doesn't exist
-    const uploadDir = path.join(process.cwd(), "public", "uploads");
-    try {
-      await mkdir(uploadDir, { recursive: true });
-    } catch (error) {
-      // Directory already exists, ignore
+    // Convert file to ArrayBuffer
+    const arrayBuffer = await file.arrayBuffer();
+
+    // Upload to Supabase Storage
+    if (!supabase) {
+      return NextResponse.json(
+        { error: "Supabase not configured. Please add NEXT_PUBLIC_SUPABASE_URL and NEXT_PUBLIC_SUPABASE_ANON_KEY to environment variables." },
+        { status: 500 }
+      );
     }
 
-    // Save file
-    const filepath = path.join(uploadDir, filename);
-    await writeFile(filepath, buffer);
+    const { data, error } = await supabase.storage
+      .from("product-images")
+      .upload(filename, arrayBuffer, {
+        contentType: file.type,
+        cacheControl: "3600",
+        upsert: false,
+      });
 
-    // Return the public path
-    const publicPath = `/uploads/${filename}`;
+    if (error) {
+      console.error("Supabase upload error:", error);
+      return NextResponse.json(
+        { error: `Upload failed: ${error.message}` },
+        { status: 500 }
+      );
+    }
+
+    // Get public URL
+    const { data: publicUrlData } = supabase.storage
+      .from("product-images")
+      .getPublicUrl(filename);
+
+    const publicUrl = publicUrlData.publicUrl;
 
     return NextResponse.json({
       success: true,
-      path: publicPath,
+      path: publicUrl,
       filename: filename,
+      message: "Image uploaded to Supabase Storage successfully!",
     });
   } catch (error) {
     console.error("Upload error:", error);
     return NextResponse.json(
       { error: "Failed to upload file", details: error.message },
+      { status: 500 }
+    );
+  }
+}
+
+/**
+ * DELETE endpoint - Delete image from Supabase Storage
+ */
+export async function DELETE(request) {
+  try {
+    const { searchParams } = new URL(request.url);
+    const filename = searchParams.get("filename");
+
+    if (!filename) {
+      return NextResponse.json(
+        { error: "Filename required" },
+        { status: 400 }
+      );
+    }
+
+    if (!supabase) {
+      return NextResponse.json(
+        { error: "Supabase not configured" },
+        { status: 500 }
+      );
+    }
+
+    const { error } = await supabase.storage
+      .from("product-images")
+      .remove([filename]);
+
+    if (error) {
+      console.error("Delete error:", error);
+      return NextResponse.json(
+        { error: `Delete failed: ${error.message}` },
+        { status: 500 }
+      );
+    }
+
+    return NextResponse.json({
+      success: true,
+      message: "Image deleted successfully",
+    });
+  } catch (error) {
+    console.error("Delete error:", error);
+    return NextResponse.json(
+      { error: "Failed to delete file", details: error.message },
       { status: 500 }
     );
   }
