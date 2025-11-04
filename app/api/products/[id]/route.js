@@ -1,5 +1,4 @@
-import { getProductById } from "@/lib/products";
-import { deleteProductFromDB } from "@/lib/db";
+import { getProductById, deleteProduct } from "@/lib/db-wrapper";
 import { NextResponse } from "next/server";
 
 export async function GET(request, { params }) {
@@ -19,7 +18,7 @@ export async function GET(request, { params }) {
 
 export async function DELETE(request, { params }) {
   try {
-    const deleted = deleteProductFromDB(params.id);
+    const deleted = await deleteProduct(params.id);
 
     if (!deleted) {
       return NextResponse.json({ error: "Product not found" }, { status: 404 });

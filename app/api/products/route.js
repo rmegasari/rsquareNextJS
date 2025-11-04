@@ -1,5 +1,4 @@
-import { getAllProducts } from "@/lib/products";
-import { saveProductToDB } from "@/lib/db";
+import { getAllProducts, saveProduct } from "@/lib/db-wrapper";
 import { NextResponse } from "next/server";
 
 export async function GET() {
@@ -24,8 +23,8 @@ export async function POST(request) {
       );
     }
 
-    // Simpan ke database
-    saveProductToDB(productData);
+    // Simpan ke database (auto-switch: Supabase > Postgres > SQLite)
+    await saveProduct(productData);
 
     return NextResponse.json({
       success: true,
