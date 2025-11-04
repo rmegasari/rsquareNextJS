@@ -12,6 +12,7 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "@supabase/supabase-js": "^2.78.0",
     "axios": "^1.11.0",
     "better-sqlite3": "^12.4.1",
     "marked": "^12.0.2",

@@ -16,16 +16,7 @@ export default function AdminTemplatesPage() {
     async function loadTemplates() {
       try {
         const response = await fetch("/api/products");
-        let products = await response.json();
-
-        // Apply localStorage overrides for featured status
-        const overrides = JSON.parse(localStorage.getItem("featured_overrides") || "{}");
-        if (Object.keys(overrides).length > 0) {
-          products = products.map((p) => ({
-            ...p,
-            featured: overrides[p.id] !== undefined ? overrides[p.id] : p.featured,
-          }));
-        }
+        const products = await response.json();
 
         setTemplates(products);
         setFilteredTemplates(products);
@@ -65,19 +56,20 @@ export default function AdminTemplatesPage() {
     try {
       const newStatus = !currentFeaturedStatus;
 
-      // Validasi: minimal harus ada 1 produk unggulan
-      const currentFeatured = templates.filter((t) => t.featured === true);
-      if (currentFeatured.length === 1 && currentFeaturedStatus === true) {
-        alert("⚠️ Minimal harus ada 1 produk unggulan!");
-        return;
+      // Call API to update featured status
+      const response = await fetch("/api/products/featured", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({ productId, featured: newStatus }),
+      });
+
+      const result = await response.json();
+
+      if (!response.ok) {
+        throw new Error(result.error || "Gagal mengupdate featured status");
       }
-
-      // Get featured overrides from localStorage
-      const overrides = JSON.parse(localStorage.getItem("featured_overrides") || "{}");
-
-      // Update override
-      overrides[productId] = newStatus;
-      localStorage.setItem("featured_overrides", JSON.stringify(overrides));
 
       // Update UI immediately
       const updatedTemplates = templates.map((t) =>
@@ -86,10 +78,10 @@ export default function AdminTemplatesPage() {
       setTemplates(updatedTemplates);
       setFilteredTemplates(updatedTemplates);
 
-      alert(`✅ Status featured ${newStatus ? "diaktifkan" : "dinonaktifkan"}\n\n⚠️ Note: Perubahan ini tersimpan di browser. Untuk production, gunakan database cloud.`);
+      alert(`✅ ${result.message}`);
     } catch (error) {
       console.error("Error toggling featured:", error);
-      alert(`❌ Gagal mengupdate status featured: ${error.message}`);
+      alert(`❌ ${error.message}`);
     }
   };
 

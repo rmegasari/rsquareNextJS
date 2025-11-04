@@ -15,18 +15,7 @@ export default function FeaturedTemplatesSection() {
     async function loadProducts() {
       try {
         const response = await fetch("/api/products");
-        let products = await response.json();
-
-        // Apply localStorage overrides for featured status
-        if (typeof window !== "undefined") {
-          const overrides = JSON.parse(localStorage.getItem("featured_overrides") || "{}");
-          if (Object.keys(overrides).length > 0) {
-            products = products.map((p) => ({
-              ...p,
-              featured: overrides[p.id] !== undefined ? overrides[p.id] : p.featured,
-            }));
-          }
-        }
+        const products = await response.json();
 
         // Filter featured products
         const featuredProducts = products.filter(p => p.featured === true || p.featured === 1);
