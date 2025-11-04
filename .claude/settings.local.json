@@ -16,7 +16,14 @@
       "Bash(test:*)",
       "Bash(git add:*)",
       "Bash(git commit:*)",
-      "Bash(git push:*)"
+      "Bash(git push:*)",
+      "Bash(chmod:*)",
+      "Bash(node scripts/sync-featured-to-db.js:*)",
+      "Bash(git reset:*)",
+      "Bash(node scripts/generate-insert-sql.js:*)",
+      "Bash(node scripts/migrate-sqlite-to-supabase.js:*)",
+      "Bash(git restore:*)",
+      "Bash(node scripts/fix-image-paths.js:*)"
     ],
     "deny": [],
     "ask": []

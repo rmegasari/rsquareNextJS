@@ -1,9 +1,13 @@
 import { getAllProducts, saveProduct } from "@/lib/db-wrapper";
 import { NextResponse } from "next/server";
 
-export async function GET() {
+export async function GET(request) {
   try {
-    const products = await getAllProducts();
+    // Check if request wants to include inactive products (for admin)
+    const { searchParams } = new URL(request.url);
+    const includeInactive = searchParams.get("includeInactive") === "true";
+
+    const products = await getAllProducts(includeInactive);
     return NextResponse.json(products);
   } catch (error) {
     console.error("Error fetching products:", error);

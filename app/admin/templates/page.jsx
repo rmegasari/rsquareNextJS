@@ -15,7 +15,8 @@ export default function AdminTemplatesPage() {
   useEffect(() => {
     async function loadTemplates() {
       try {
-        const response = await fetch("/api/products");
+        // Include inactive products for admin
+        const response = await fetch("/api/products?includeInactive=true");
         const products = await response.json();
 
         setTemplates(products);
@@ -81,6 +82,39 @@ export default function AdminTemplatesPage() {
       alert(`✅ ${result.message}`);
     } catch (error) {
       console.error("Error toggling featured:", error);
+      alert(`❌ ${error.message}`);
+    }
+  };
+
+  const handleToggleActive = async (productId, currentActiveStatus) => {
+    try {
+      const newStatus = !currentActiveStatus;
+
+      // Call API to update active status
+      const response = await fetch(`/api/products/${productId}/active`, {
+        method: "PATCH",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({ active: newStatus }),
+      });
+
+      const result = await response.json();
+
+      if (!response.ok) {
+        throw new Error(result.error || "Gagal mengupdate active status");
+      }
+
+      // Update UI immediately
+      const updatedTemplates = templates.map((t) =>
+        t.id === productId ? { ...t, active: newStatus } : t
+      );
+      setTemplates(updatedTemplates);
+      setFilteredTemplates(updatedTemplates);
+
+      alert(`✅ ${result.message}`);
+    } catch (error) {
+      console.error("Error toggling active:", error);
       alert(`❌ ${error.message}`);
     }
   };
@@ -220,11 +254,25 @@ export default function AdminTemplatesPage() {
                               ⭐ Featured
                             </span>
                           )}
+                          <span className={`admin-badge ${template.active !== false ? 'bg-green-100 text-green-700' : 'bg-gray-100 text-gray-600'}`}>
+                            {template.active !== false ? '✓ Aktif' : '✕ Tidak Aktif'}
+                          </span>
                         </div>
                       </div>
 
                       {/* Actions */}
                       <div className="flex items-center gap-2">
+                        <button
+                          onClick={() => handleToggleActive(template.id, template.active !== false)}
+                          className={`px-3 py-2 text-sm rounded-lg transition-all hover:scale-105 font-medium ${
+                            template.active !== false
+                              ? "bg-green-100 hover:bg-green-200 text-green-700"
+                              : "bg-gray-100 hover:bg-gray-200 text-gray-600"
+                          }`}
+                          title={template.active !== false ? "Nonaktifkan Template" : "Aktifkan Template"}
+                        >
+                          {template.active !== false ? "✓" : "✕"}
+                        </button>
                         <button
                           onClick={() => handleToggleFeatured(template.id, template.featured)}
                           className={`px-3 py-2 text-sm rounded-lg transition-all hover:scale-105 font-medium ${
