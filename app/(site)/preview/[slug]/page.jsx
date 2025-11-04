@@ -63,23 +63,23 @@ export default async function ProductPreviewPage({ params }) {
     : "";
 
   return (
-    <div className="py-20 px-6 bg-gray-50">
+    <div className="py-20 px-6 bg-gray-50 dark:bg-gray-900">
       <div className="container mx-auto max-w-4xl space-y-12">
         {/* Header Section */}
-        <header className="text-center space-y-6 bg-white rounded-2xl shadow-sm p-8 md:p-12" data-animate-on-scroll>
-          <h1 className="text-3xl md:text-4xl font-extrabold text-gray-900 mb-4">
+        <header className="text-center space-y-6 bg-white dark:bg-gray-800 rounded-2xl shadow-sm p-8 md:p-12" data-animate-on-scroll>
+          <h1 className="text-3xl md:text-4xl font-extrabold text-gray-900 dark:text-gray-100 mb-4">
             {product.judul}
           </h1>
-          <p className="inline-block bg-orange-100 text-orange-800 font-bold text-xl px-6 py-2 rounded-full shadow-sm">
+          <p className="inline-block bg-orange-100 dark:bg-orange-900/30 text-orange-800 dark:text-orange-400 font-bold text-xl px-6 py-2 rounded-full shadow-sm">
             {formatPrice(product.harga)}
           </p>
           {descriptionHTML ? (
             <div
-              className="max-w-2xl mx-auto text-base text-gray-600 space-y-3 leading-relaxed"
+              className="max-w-2xl mx-auto text-base text-gray-600 dark:text-gray-300 space-y-3 leading-relaxed"
               dangerouslySetInnerHTML={{ __html: descriptionHTML }}
             />
           ) : (
-            <p className="text-base text-gray-600 max-w-2xl mx-auto">{product.deskripsi_singkat}</p>
+            <p className="text-base text-gray-600 dark:text-gray-300 max-w-2xl mx-auto">{product.deskripsi_singkat}</p>
           )}
         </header>
 
@@ -90,25 +90,25 @@ export default async function ProductPreviewPage({ params }) {
             return (
               <div className="space-y-6" key={item.judul}>
                 {/* Image Container */}
-                <div className="bg-white rounded-2xl shadow-sm overflow-hidden">
+                <div className="bg-white dark:bg-gray-800 rounded-2xl shadow-sm overflow-hidden">
                   <ImageZoom
                     src={resolveAssetPath(item.gambar)}
                     alt={item.judul}
                     width={960}
                     height={720}
-                    className="relative w-full bg-white"
+                    className="relative w-full bg-white dark:bg-gray-800"
                   />
                 </div>
                 {/* Text Content - Outside Image Container */}
                 <div className="space-y-3 px-4">
-                  <h2 className="text-xl md:text-2xl font-bold text-gray-900">{item.judul}</h2>
+                  <h2 className="text-xl md:text-2xl font-bold text-gray-900 dark:text-gray-100">{item.judul}</h2>
                   {galleryHTML ? (
                     <div
-                      className="space-y-2 text-gray-600 leading-relaxed text-sm md:text-base"
+                      className="space-y-2 text-gray-600 dark:text-gray-300 leading-relaxed text-sm md:text-base"
                       dangerouslySetInnerHTML={{ __html: galleryHTML }}
                     />
                   ) : (
-                    <p className="text-gray-600 text-sm md:text-base">{item.deskripsi}</p>
+                    <p className="text-gray-600 dark:text-gray-300 text-sm md:text-base">{item.deskripsi}</p>
                   )}
                 </div>
               </div>
@@ -118,7 +118,7 @@ export default async function ProductPreviewPage({ params }) {
 
         {/* Video Section */}
         {product.detail?.link_youtube && (
-          <section className="bg-white rounded-2xl shadow-sm overflow-hidden" data-animate-on-scroll>
+          <section className="bg-white dark:bg-gray-800 rounded-2xl shadow-sm overflow-hidden" data-animate-on-scroll>
             <div className="relative w-full" style={{ paddingTop: "56.25%" }}>
               <iframe
                 className="absolute top-0 left-0 w-full h-full"
@@ -132,9 +132,9 @@ export default async function ProductPreviewPage({ params }) {
         )}
 
         {/* CTA Section */}
-        <section className="text-center space-y-6 bg-white rounded-2xl shadow-sm p-8 md:p-12" data-animate-on-scroll>
-          <h2 className="text-2xl md:text-3xl font-bold text-gray-900">Siap Meningkatkan Produktivitas?</h2>
-          <p className="text-base text-gray-600 max-w-xl mx-auto">
+        <section className="text-center space-y-6 bg-white dark:bg-gray-800 rounded-2xl shadow-sm p-8 md:p-12" data-animate-on-scroll>
+          <h2 className="text-2xl md:text-3xl font-bold text-gray-900 dark:text-gray-100">Siap Meningkatkan Produktivitas?</h2>
+          <p className="text-base text-gray-600 dark:text-gray-300 max-w-xl mx-auto">
             Dapatkan template ini sekarang melalui salah satu tautan di bawah.
           </p>
           <div className="max-w-md mx-auto space-y-3">

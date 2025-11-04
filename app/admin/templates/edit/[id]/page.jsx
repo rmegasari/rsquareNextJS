@@ -2,6 +2,7 @@
 
 import { useState, useEffect } from "react";
 import { useRouter, useParams } from "next/navigation";
+import ImageUpload from "@/components/ImageUpload";
 
 export default function EditTemplatePage() {
   const router = useRouter();
@@ -234,34 +235,25 @@ export default function EditTemplatePage() {
         {/* Gambar */}
         <div className="bg-white rounded-xl shadow-sm p-6 border border-gray-100">
           <h2 className="text-xl font-bold text-gray-900 mb-4">Gambar</h2>
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-            <div>
-              <label className="block text-sm font-medium text-gray-700 mb-2">
-                Path Gambar Thumbnail <span className="text-red-500">*</span>
-              </label>
-              <input
-                type="text"
-                name="gambar_thumbnail"
-                value={formData.gambar_thumbnail || ""}
-                onChange={handleChange}
-                required
-                className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-orange-500"
-              />
-            </div>
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+            <ImageUpload
+              label="Gambar Thumbnail"
+              value={formData.gambar_thumbnail || ""}
+              onChange={(path) => setFormData({ ...formData, gambar_thumbnail: path })}
+              required
+              helpText="Digunakan di daftar template. Maksimal 5MB. Format: JPG, PNG, WebP, GIF"
+            />
 
-            <div>
-              <label className="block text-sm font-medium text-gray-700 mb-2">
-                Path Gambar Utama <span className="text-red-500">*</span>
-              </label>
-              <input
-                type="text"
-                name="detail.gambar_utama"
-                value={formData.detail?.gambar_utama || ""}
-                onChange={handleChange}
-                required
-                className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-orange-500"
-              />
-            </div>
+            <ImageUpload
+              label="Gambar Utama"
+              value={formData.detail?.gambar_utama || ""}
+              onChange={(path) => setFormData({
+                ...formData,
+                detail: { ...formData.detail, gambar_utama: path }
+              })}
+              required
+              helpText="Digunakan di halaman detail. Maksimal 5MB. Format: JPG, PNG, WebP, GIF"
+            />
           </div>
         </div>
 
@@ -307,6 +299,21 @@ export default function EditTemplatePage() {
                   onChange={handleChange}
                   className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-orange-500"
                 />
+              </div>
+
+              <div>
+                <label className="block text-sm font-medium text-gray-700 mb-2">
+                  Link YouTube (Embed)
+                </label>
+                <input
+                  type="url"
+                  name="detail.link_youtube"
+                  value={formData.detail?.link_youtube || ""}
+                  onChange={handleChange}
+                  placeholder="https://www.youtube.com/embed/VIDEO_ID"
+                  className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-orange-500"
+                />
+                <p className="text-xs text-gray-500 mt-1">Gunakan format embed: https://www.youtube.com/embed/VIDEO_ID</p>
               </div>
 
               <div>
@@ -397,12 +404,11 @@ export default function EditTemplatePage() {
                 rows="2"
                 className="px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-orange-500"
               />
-              <input
-                type="text"
-                placeholder="Path gambar"
+              <ImageUpload
+                label="Gambar Galeri"
                 value={galeriItem.gambar}
-                onChange={(e) => setGaleriItem({ ...galeriItem, gambar: e.target.value })}
-                className="px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-orange-500"
+                onChange={(path) => setGaleriItem({ ...galeriItem, gambar: path })}
+                helpText="Upload gambar untuk item galeri. Maksimal 5MB. Format: JPG, PNG, WebP, GIF"
               />
               <button
                 type="button"

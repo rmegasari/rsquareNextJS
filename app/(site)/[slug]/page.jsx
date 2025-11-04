@@ -153,38 +153,7 @@ export default async function ProductDetailPage({ params }) {
           </div>
         </div>
 
-        {product.detail?.galeri?.length ? (
-          <section className="mt-20 space-y-12">
-            <h2 className="text-3xl font-bold text-gray-900 dark:text-gray-100 text-center">Apa Saja yang Kamu Dapatkan?</h2>
-            <div className="grid gap-10">
-              {product.detail.galeri.map((item) => {
-                const galleryHTML = item.deskripsi ? marked.parse(item.deskripsi) : "";
-                return (
-                  <div className="grid md:grid-cols-2 gap-10 items-center card rounded-2xl overflow-hidden" key={item.judul}>
-                    <ImageZoom
-                      src={resolveAssetPath(item.gambar)}
-                      alt={item.judul}
-                      width={960}
-                      height={720}
-                      className="relative w-full h-full min-h-[240px] bg-white dark:bg-gray-800"
-                    />
-                    <div className="space-y-4 p-6 md:p-10">
-                      <h3 className="text-2xl font-bold text-gray-900 dark:text-gray-100">{item.judul}</h3>
-                      {galleryHTML ? (
-                        <div
-                          className="space-y-3 text-gray-600 dark:text-gray-300 leading-relaxed"
-                          dangerouslySetInnerHTML={{ __html: galleryHTML }}
-                        />
-                      ) : (
-                        <p className="text-gray-600 dark:text-gray-300">{item.deskripsi}</p>
-                      )}
-                    </div>
-                  </div>
-                );
-              })}
-            </div>
-          </section>
-        ) : null}
+        
       </div>
     </div>
   );
