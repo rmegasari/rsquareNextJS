@@ -9,6 +9,11 @@ export const metadata = {
     "Eksplor semua template Google Sheets premium dari RSQUARE. Pilih template terbaik sesuai kebutuhan bisnis, event, atau produktivitas pribadi Kamu.",
 };
 
+// Force dynamic rendering to always fetch fresh data from database
+// This ensures active/inactive status changes are reflected immediately
+export const dynamic = 'force-dynamic';
+export const revalidate = 0;
+
 function formatPrice(price) {
   if (Number(price) === 0) {
     return "Gratis";

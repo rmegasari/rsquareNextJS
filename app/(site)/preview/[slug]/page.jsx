@@ -8,6 +8,10 @@ import ImageZoom from "@/components/ImageZoom";
 
 marked.setOptions({ mangle: false, headerIds: false });
 
+// Force dynamic rendering to check active status in real-time
+export const dynamic = 'force-dynamic';
+export const revalidate = 0;
+
 export async function generateStaticParams() {
   const products = await getProductMetadataList();
   return products.map((product) => ({ slug: product.slug }));

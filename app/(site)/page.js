@@ -6,6 +6,10 @@ import MissionCTA from "@/components/MissionCTA";
 import ProductMarquee from "@/components/ProductMarquee";
 import VideoShowcase from "@/components/VideoShowcase";
 
+// Force dynamic rendering to always show latest active/inactive products
+export const dynamic = 'force-dynamic';
+export const revalidate = 0;
+
 export default function HomePage() {
   return (
     <>
