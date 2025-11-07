@@ -7,6 +7,10 @@ const nextConfig = {
         protocol: "https",
         hostname: "startupfa.me",
       },
+      {
+        protocol: "https",
+        hostname: "qpeurykzbspfuxfsjlra.supabase.co",
+      },
     ],
   },
 };

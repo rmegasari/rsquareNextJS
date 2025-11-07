@@ -3,6 +3,7 @@
 import { useState, useEffect } from "react";
 import { useRouter, useParams } from "next/navigation";
 import ImageUpload from "@/components/ImageUpload";
+import { processProductUploads } from "@/lib/uploadHelpers";
 
 export default function EditTemplatePage() {
   const router = useRouter();
@@ -110,13 +111,29 @@ export default function EditTemplatePage() {
     }
 
     try {
-      // Update to database via API
+      // Debug: Log gallery data before upload
+      console.log('📋 Form data before upload:', {
+        galleryCount: formData.detail.galeri?.length || 0,
+        gallery: formData.detail.galeri
+      });
+
+      // Step 1: Upload all files to Supabase Storage
+      alert("📤 Mengupload gambar ke Supabase Storage...");
+      const processedData = await processProductUploads(formData);
+
+      // Debug: Log gallery data after upload
+      console.log('📋 Processed data after upload:', {
+        galleryCount: processedData.detail.galeri?.length || 0,
+        gallery: processedData.detail.galeri
+      });
+
+      // Step 2: Update to database via API with uploaded URLs
       const response = await fetch("/api/products", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
         },
-        body: JSON.stringify(formData),
+        body: JSON.stringify(processedData),
       });
 
       const result = await response.json();
@@ -275,7 +292,7 @@ export default function EditTemplatePage() {
             </div>
 
             <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-              <div>
+              {/* <div>
                 <label className="block text-sm font-medium text-gray-700 mb-2">
                   Link Preview Detail
                 </label>
@@ -286,7 +303,7 @@ export default function EditTemplatePage() {
                   onChange={handleChange}
                   className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-orange-500"
                 />
-              </div>
+              </div> */}
 
               <div>
                 <label className="block text-sm font-medium text-gray-700 mb-2">
@@ -317,15 +334,17 @@ export default function EditTemplatePage() {
               </div>
 
               <div>
-                <label className="block text-sm font-medium text-gray-700 mb-2">
-                  File Panduan PDF
-                </label>
-                <input
-                  type="text"
-                  name="detail.file_panduan_pdf"
+                <ImageUpload
+                  label="File Panduan PDF"
                   value={formData.detail?.file_panduan_pdf || ""}
-                  onChange={handleChange}
-                  className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-orange-500"
+                  onChange={(newValue) => {
+                    setFormData({
+                      ...formData,
+                      detail: { ...formData.detail, file_panduan_pdf: newValue },
+                    });
+                  }}
+                  acceptPdf={true}
+                  helpText="Upload file PDF panduan (max 10MB) atau masukkan URL manual"
                 />
               </div>
             </div>
@@ -426,14 +445,23 @@ export default function EditTemplatePage() {
                     key={index}
                     className="flex items-center justify-between p-3 bg-gray-50 rounded-lg"
                   >
-                    <div>
+                    <div className="flex-1">
                       <div className="font-medium text-gray-900">{item.judul}</div>
-                      <div className="text-gray-500 text-sm">{item.gambar}</div>
+                      {item.deskripsi && (
+                        <div className="text-gray-600 text-sm mt-1">{item.deskripsi}</div>
+                      )}
+                      <div className="text-gray-500 text-xs mt-1">
+                        {typeof item.gambar === 'string'
+                          ? item.gambar
+                          : item.gambar instanceof File
+                            ? `📎 ${item.gambar.name}`
+                            : 'No image'}
+                      </div>
                     </div>
                     <button
                       type="button"
                       onClick={() => handleRemoveGaleri(index)}
-                      className="text-red-600 hover:text-red-800 font-medium"
+                      className="text-red-600 hover:text-red-800 font-medium ml-4"
                     >
                       🗑️
                     </button>

@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import Image from "next/image";
 
 export default function ImageUpload({
@@ -8,68 +8,70 @@ export default function ImageUpload({
   value,
   onChange,
   required = false,
-  helpText = null
+  helpText = null,
+  acceptPdf = false  // New prop to enable PDF upload
 }) {
-  const [uploading, setUploading] = useState(false);
-  const [previewUrl, setPreviewUrl] = useState(value || "");
+  const [previewUrl, setPreviewUrl] = useState(
+    typeof value === 'string' ? value : ""
+  );
+  const [selectedFile, setSelectedFile] = useState(null);
 
-  const handleFileChange = async (e) => {
+  // Update preview when value changes from parent
+  useEffect(() => {
+    if (value && typeof value === 'string' && !value.startsWith("data:") && !selectedFile) {
+      setPreviewUrl(value);
+    } else if (!value || value === "") {
+      // Clear preview when value is empty
+      setPreviewUrl("");
+      setSelectedFile(null);
+    }
+  }, [value, selectedFile]);
+
+  const handleFileChange = (e) => {
     const file = e.target.files?.[0];
     if (!file) return;
 
     // Validate file type
-    const allowedTypes = ["image/jpeg", "image/jpg", "image/png", "image/webp", "image/gif"];
+    const allowedTypes = acceptPdf
+      ? ["image/jpeg", "image/jpg", "image/png", "image/webp", "image/gif", "application/pdf"]
+      : ["image/jpeg", "image/jpg", "image/png", "image/webp", "image/gif"];
+
     if (!allowedTypes.includes(file.type)) {
-      alert("❌ Format file tidak valid. Gunakan JPEG, PNG, WebP, atau GIF.");
+      alert(`❌ Format file tidak valid. Gunakan ${acceptPdf ? 'JPEG, PNG, WebP, GIF, atau PDF' : 'JPEG, PNG, WebP, atau GIF'}.`);
       return;
     }
 
-    // Validate file size (max 5MB)
-    const maxSize = 5 * 1024 * 1024; // 5MB
+    // Validate file size (max 10MB for PDF, 5MB for images)
+    const isPdf = file.type === "application/pdf";
+    const maxSize = isPdf ? 10 * 1024 * 1024 : 5 * 1024 * 1024;
     if (file.size > maxSize) {
-      alert("❌ Ukuran file terlalu besar. Maksimal 5MB.");
+      alert(`❌ Ukuran file terlalu besar. Maksimal ${isPdf ? '10MB' : '5MB'}.`);
       return;
     }
 
-    // Show preview immediately
-    const reader = new FileReader();
-    reader.onload = (e) => {
-      setPreviewUrl(e.target?.result);
-    };
-    reader.readAsDataURL(file);
+    // Save file object for later upload
+    setSelectedFile(file);
 
-    // Upload to server
-    setUploading(true);
-    try {
-      const formData = new FormData();
-      formData.append("file", file);
-
-      const response = await fetch("/api/upload", {
-        method: "POST",
-        body: formData,
-      });
-
-      const result = await response.json();
-
-      if (!response.ok) {
-        throw new Error(result.error || "Upload gagal");
-      }
-
-      // Update parent component with new path
-      onChange(result.path);
-      setPreviewUrl(result.path);
-      alert("✅ Gambar berhasil diupload!");
-    } catch (error) {
-      console.error("Upload error:", error);
-      alert(`❌ Gagal upload gambar: ${error.message}`);
-      setPreviewUrl(value || "");
-    } finally {
-      setUploading(false);
+    // Show preview immediately (only for images, not PDF)
+    if (!isPdf) {
+      const reader = new FileReader();
+      reader.onload = (e) => {
+        const dataUrl = e.target?.result;
+        setPreviewUrl(dataUrl);
+        // Pass file object to parent
+        onChange(file);
+      };
+      reader.readAsDataURL(file);
+    } else {
+      // For PDF, just show filename
+      setPreviewUrl(file.name);
+      onChange(file);
     }
   };
 
   const handleRemove = () => {
     setPreviewUrl("");
+    setSelectedFile(null);
     onChange("");
   };
 
@@ -82,13 +84,25 @@ export default function ImageUpload({
       {/* Preview */}
       {previewUrl && (
         <div className="relative w-full aspect-video bg-gray-100 rounded-lg overflow-hidden border border-gray-300">
-          <Image
-            src={previewUrl}
-            alt="Preview"
-            fill
-            className="object-contain"
-            unoptimized={previewUrl.startsWith("data:")}
-          />
+          {previewUrl.endsWith('.pdf') || previewUrl.includes('application/pdf') ? (
+            <div className="flex items-center justify-center h-full">
+              <div className="text-center">
+                <svg className="w-16 h-16 mx-auto text-red-500 mb-2" fill="currentColor" viewBox="0 0 20 20">
+                  <path fillRule="evenodd" d="M4 4a2 2 0 012-2h4.586A2 2 0 0112 2.586L15.414 6A2 2 0 0116 7.414V16a2 2 0 01-2 2H6a2 2 0 01-2-2V4z" clipRule="evenodd" />
+                </svg>
+                <p className="text-sm font-medium text-gray-700">PDF File</p>
+                <p className="text-xs text-gray-500">{previewUrl.split('/').pop()}</p>
+              </div>
+            </div>
+          ) : (
+            <Image
+              src={previewUrl}
+              alt="Preview"
+              fill
+              className="object-contain"
+              unoptimized={previewUrl.startsWith("data:")}
+            />
+          )}
           <button
             type="button"
             onClick={handleRemove}
@@ -103,27 +117,22 @@ export default function ImageUpload({
       <div className="flex items-center gap-2">
         <label
           htmlFor={`file-${label}`}
-          className={`px-4 py-2 rounded-lg font-medium transition-colors cursor-pointer ${
-            uploading
-              ? "bg-gray-300 text-gray-500 cursor-not-allowed"
-              : "bg-blue-500 hover:bg-blue-600 text-white"
-          }`}
+          className="px-4 py-2 rounded-lg font-medium transition-colors cursor-pointer bg-blue-500 hover:bg-blue-600 text-white"
         >
-          {uploading ? "Uploading..." : previewUrl ? "📁 Ganti Gambar" : "📁 Upload Gambar"}
+          {previewUrl ? `📁 Ganti ${acceptPdf ? 'File' : 'Gambar'}` : `📁 Pilih ${acceptPdf ? 'File' : 'Gambar'}`}
         </label>
         <input
           id={`file-${label}`}
           type="file"
-          accept="image/jpeg,image/jpg,image/png,image/webp,image/gif"
+          accept={acceptPdf ? "image/jpeg,image/jpg,image/png,image/webp,image/gif,application/pdf" : "image/jpeg,image/jpg,image/png,image/webp,image/gif"}
           onChange={handleFileChange}
-          disabled={uploading}
           className="hidden"
         />
 
         {/* Manual path input */}
         <input
           type="text"
-          value={value || ""}
+          value={typeof value === 'string' ? value : ""}
           onChange={(e) => {
             onChange(e.target.value);
             setPreviewUrl(e.target.value);

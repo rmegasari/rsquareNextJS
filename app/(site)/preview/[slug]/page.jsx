@@ -144,6 +144,17 @@ export default async function ProductPreviewPage({ params }) {
             >
               ← Kembali ke Ringkasan
             </Link>
+
+            {/* Free Download Button - shown for all free products */}
+            {Number(product.harga) === 0 && (
+              <Link
+                href={`/instructions/${product.id}`}
+                className="btn-primary btn-shiny flex items-center justify-center w-full px-8 py-3 rounded-lg font-semibold text-lg text-white"
+              >
+                Download Gratis
+              </Link>
+            )}
+
             {product.detail?.link_pembelian?.map((link) => (
               <a
                 key={link.url}

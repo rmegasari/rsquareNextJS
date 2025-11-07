@@ -14,18 +14,23 @@ export default function FeaturedTemplatesSection() {
   useEffect(() => {
     async function loadProducts() {
       try {
-        const response = await fetch("/api/products");
-        const products = await response.json();
+        // Use optimized endpoints for better performance
+        const [featuredResponse, freeResponse] = await Promise.all([
+          fetch("/api/products/featured"),
+          fetch("/api/products/free")
+        ]);
 
-        // Filter featured products
-        const featuredProducts = products.filter(p => p.featured === true || p.featured === 1);
-        setFeatured(featuredProducts);
+        const [featuredProducts, freeProducts] = await Promise.all([
+          featuredResponse.json(),
+          freeResponse.json()
+        ]);
 
-        // Filter free products
-        const freeProducts = products.filter(p => Number(p.harga) === 0);
-        setFree(freeProducts);
+        setFeatured(Array.isArray(featuredProducts) ? featuredProducts : []);
+        setFree(Array.isArray(freeProducts) ? freeProducts : []);
       } catch (error) {
         console.error("Error loading products:", error);
+        setFeatured([]);
+        setFree([]);
       } finally {
         setIsLoading(false);
       }

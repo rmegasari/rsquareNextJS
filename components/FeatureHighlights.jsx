@@ -65,40 +65,46 @@ export default function FeatureHighlights() {
 
   return (
     <section className="py-24 dark:bg-gray-900">
-      <div className="container mx-auto px-6 space-y-16">
-        {FEATURES.map((feature, index) => {
-          const isRightAligned = feature.align === "right";
-          const content = (
-            <div className="w-full md:w-5/12 space-y-3" data-animate-on-scroll key={`${feature.id}-content`}>
-              <h3 className="font-bold text-xl mb-2 text-gray-800 dark:text-gray-100">{feature.title}</h3>
-              <p className="text-gray-600 dark:text-gray-300">{feature.description}</p>
-            </div>
-          );
-          const image = (
-            <div className="hidden md:block md:w-5/12" data-animate-on-scroll key={`${feature.id}-image`}>
-              <Image
-                src={feature.image}
-                alt={feature.title}
-                width={480}
-                height={360}
-                className="w-full h-auto rounded-lg shadow-lg"
-                priority={index === 0}
-              />
-            </div>
-          );
+      <div className="container mx-auto px-6">
+        {/* Timeline vertical line */}
+        <div className="hidden md:block absolute left-1/2 top-24 bottom-24 w-0.5 bg-gradient-to-b from-orange-200 via-orange-400 to-orange-200 dark:from-orange-800 dark:via-orange-600 dark:to-orange-800 transform -translate-x-1/2"
+             style={{ height: 'calc(100% - 12rem)' }} />
 
-          return (
-            <div className="relative mb-16" key={feature.id}>
-              <div className="md:flex items-center md:justify-between">
-                {isRightAligned ? content : image}
-                <div className="z-10 flex items-center justify-center w-12 h-12 bg-orange-500 text-white rounded-full font-bold shadow-lg absolute left-6 top-0 -translate-x-1/2 md:static md:translate-x-0">
-                  {feature.icon}
-                </div>
-                {isRightAligned ? image : content}
+        <div className="relative space-y-16">
+          {FEATURES.map((feature, index) => {
+            const isRightAligned = feature.align === "right";
+            const content = (
+              <div className="w-full md:w-5/12 space-y-3" data-animate-on-scroll key={`${feature.id}-content`}>
+                <h3 className="font-bold text-xl mb-2 text-gray-800 dark:text-gray-100">{feature.title}</h3>
+                <p className="text-gray-600 dark:text-gray-300">{feature.description}</p>
               </div>
-            </div>
-          );
-        })}
+            );
+            const image = (
+              <div className="hidden md:block md:w-5/12" data-animate-on-scroll key={`${feature.id}-image`}>
+                <Image
+                  src={feature.image}
+                  alt={feature.title}
+                  width={480}
+                  height={360}
+                  className="w-full h-auto rounded-lg shadow-lg"
+                  priority={index === 0}
+                />
+              </div>
+            );
+
+            return (
+              <div className="relative mb-16" key={feature.id}>
+                <div className="md:flex items-center md:justify-between md:gap-8">
+                  {isRightAligned ? content : image}
+                  <div className="z-10 flex items-center justify-center w-14 h-14 bg-orange-500 text-white rounded-full font-bold shadow-xl absolute left-6 top-0 -translate-x-1/2 md:static md:translate-x-0 md:shrink-0 ring-4 ring-white dark:ring-gray-900">
+                    {feature.icon}
+                  </div>
+                  {isRightAligned ? image : content}
+                </div>
+              </div>
+            );
+          })}
+        </div>
       </div>
     </section>
   );

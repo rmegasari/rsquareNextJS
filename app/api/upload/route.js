@@ -21,20 +21,28 @@ export async function POST(request) {
       );
     }
 
-    // Validate file type
-    const allowedTypes = ["image/jpeg", "image/jpg", "image/png", "image/webp", "image/gif"];
+    // Validate file type (images and PDFs)
+    const allowedTypes = [
+      "image/jpeg",
+      "image/jpg",
+      "image/png",
+      "image/webp",
+      "image/gif",
+      "application/pdf"
+    ];
     if (!allowedTypes.includes(file.type)) {
       return NextResponse.json(
-        { error: "Invalid file type. Only JPEG, PNG, WebP, and GIF are allowed." },
+        { error: "Invalid file type. Only JPEG, PNG, WebP, GIF, and PDF are allowed." },
         { status: 400 }
       );
     }
 
-    // Validate file size (max 5MB)
-    const maxSize = 5 * 1024 * 1024; // 5MB
+    // Validate file size (max 10MB for PDFs, 5MB for images)
+    const isPdf = file.type === "application/pdf";
+    const maxSize = isPdf ? 10 * 1024 * 1024 : 5 * 1024 * 1024; // 10MB for PDF, 5MB for images
     if (file.size > maxSize) {
       return NextResponse.json(
-        { error: "File size too large. Maximum 5MB allowed." },
+        { error: `File size too large. Maximum ${isPdf ? '10MB' : '5MB'} allowed.` },
         { status: 400 }
       );
     }

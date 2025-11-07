@@ -1,11 +1,30 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import Image from "next/image";
+import { createPortal } from "react-dom";
 
 export default function ImageZoom({ src, alt, width, height, className = "" }) {
   const [isZoomed, setIsZoomed] = useState(false);
   const [imageError, setImageError] = useState(false);
+  const [mounted, setMounted] = useState(false);
+
+  useEffect(() => {
+    setMounted(true);
+  }, []);
+
+  useEffect(() => {
+    if (isZoomed) {
+      // Prevent body scroll when zoomed
+      document.body.style.overflow = 'hidden';
+    } else {
+      document.body.style.overflow = '';
+    }
+
+    return () => {
+      document.body.style.overflow = '';
+    };
+  }, [isZoomed]);
 
   const toggleZoom = () => {
     setIsZoomed(!isZoomed);
@@ -45,15 +64,16 @@ export default function ImageZoom({ src, alt, width, height, className = "" }) {
         </div>
       </div>
 
-      {/* Modal Zoom */}
-      {isZoomed && (
+      {/* Modal Zoom - Using Portal to render outside parent containers */}
+      {isZoomed && mounted && createPortal(
         <div
           className="fixed inset-0 z-[9999] bg-black/95 flex items-center justify-center p-4 cursor-zoom-out"
           onClick={toggleZoom}
+          style={{ margin: 0 }}
         >
           {/* Close Button */}
           <button
-            className="absolute top-4 right-4 bg-white text-gray-900 w-12 h-12 rounded-full flex items-center justify-center text-2xl font-bold hover:bg-gray-200 transition-colors z-10"
+            className="absolute top-4 right-4 bg-white text-gray-900 w-12 h-12 rounded-full flex items-center justify-center text-2xl font-bold hover:bg-gray-200 transition-colors z-10 shadow-lg"
             onClick={(e) => {
               e.stopPropagation();
               toggleZoom();
@@ -72,7 +92,7 @@ export default function ImageZoom({ src, alt, width, height, className = "" }) {
               src={src}
               alt={alt}
               className="max-w-full max-h-full object-contain"
-              style={{ maxHeight: '90vh' }}
+              style={{ maxHeight: '90vh', maxWidth: '95vw' }}
             />
           </div>
 
@@ -80,7 +100,8 @@ export default function ImageZoom({ src, alt, width, height, className = "" }) {
           <div className="absolute bottom-8 left-1/2 transform -translate-x-1/2 bg-white/10 backdrop-blur-md text-white px-6 py-3 rounded-full text-sm pointer-events-none">
             Klik di luar gambar atau tombol ✕ untuk keluar
           </div>
-        </div>
+        </div>,
+        document.body
       )}
     </>
   );

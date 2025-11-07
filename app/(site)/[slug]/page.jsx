@@ -57,20 +57,21 @@ function formatPrice(price) {
 
 function PurchaseButtons({ product }) {
   const isFree = Number(product.harga) === 0;
-  const hasInstructions = Boolean(product.detail?.file_panduan_pdf);
   const paymentLink = product.detail?.payment_gateway;
 
   return (
     <div className="space-y-4">
-      {isFree && hasInstructions && (
+      {/* Free Download Button - shown for all free products */}
+      {isFree && (
         <Link
           href={`/instructions/${product.id}`}
           className="btn-primary btn-shiny flex items-center justify-center w-full px-8 py-3 rounded-lg font-semibold text-lg text-white"
         >
-          Download &amp; Panduan
+          Download Gratis
         </Link>
       )}
 
+      {/* Payment Gateway Button - only for paid products */}
       {!isFree && paymentLink && (
         <a
           href={paymentLink}
@@ -82,6 +83,7 @@ function PurchaseButtons({ product }) {
         </a>
       )}
 
+      {/* Purchase Links (Shopee, Tokopedia, etc) */}
       {product.detail?.link_pembelian?.map((link) => (
         <a
           key={link.url}
