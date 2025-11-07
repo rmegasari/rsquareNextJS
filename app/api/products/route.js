@@ -7,11 +7,25 @@ export async function GET(request) {
     const { searchParams } = new URL(request.url);
     const includeInactive = searchParams.get("includeInactive") === "true";
 
+    console.log(`📋 GET /api/products - includeInactive: ${includeInactive}`);
+
     const products = await getAllProducts(includeInactive);
+
+    console.log(`✅ Returning ${products?.length || 0} products`);
+
     return NextResponse.json(products);
   } catch (error) {
-    console.error("Error fetching products:", error);
-    return NextResponse.json({ error: "Failed to fetch products" }, { status: 500 });
+    console.error("❌ Error fetching products:", error);
+    console.error("Error details:", {
+      message: error.message,
+      code: error.code,
+      stack: error.stack,
+    });
+    return NextResponse.json({
+      error: "Failed to fetch products",
+      details: error.message,
+      code: error.code,
+    }, { status: 500 });
   }
 }
 
